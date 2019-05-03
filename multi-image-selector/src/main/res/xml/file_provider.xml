@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+
+    external-path 代表文件位于手机外部存储空间,访问效果如同 Environment.getExternalStorageDirectory()
+
+    files-path 代表文件位于手机内部存储空间,访问效果如同 Context.getFilesDir()
+
+    cache-path 代表文件位于手机内部缓存空间,访问效果如同 getCacheDir()
+
+    <external-path
+        name="image"
+        path="DCIM/Camera/" />
+</paths>

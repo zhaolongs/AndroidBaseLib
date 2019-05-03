@@ -1,0 +1,23 @@
+<resources >
+
+	<style name = "popwin_from_center_anim_style" >
+		<item name = "android:windowEnterAnimation" >@anim/pop_from_center_in</item >
+		<item name = "android:windowExitAnimation" >@anim/pop_from_center_out</item >
+	</style >
+
+	<style name = "popwin_from_bottom_anim_style" >
+		<item name = "android:windowEnterAnimation" >@anim/pop_from_bottom_in</item >
+		<item name = "android:windowExitAnimation" >@anim/pop_from_bottom_out</item >
+	</style >
+	<style name = "popwin_from_right_anim_style" >
+		<item name = "android:windowEnterAnimation" >@anim/pop_from_right_in</item >
+		<item name = "android:windowExitAnimation" >@anim/pop_from_right_out</item >
+	</style >
+
+	<style name="chat_room_menu_item_wrapper">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_gravity">center_horizontal</item>
+		<item name="android:orientation">vertical</item>
+	</style>
+</resources >

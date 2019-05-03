@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:columnWidth="@dimen/mis_image_size"
+        android:horizontalSpacing="@dimen/mis_space_size"
+        android:numColumns="auto_fit"
+        android:paddingBottom="50dp"
+        android:verticalSpacing="@dimen/mis_space_size" />
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#cc000000"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/category_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingLeft="20dp"
+            android:text="所有图片"
+            android:textAllCaps="false"
+            android:textColor="@color/mis_folder_text_color"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="22dp"
+            android:layout_toRightOf="@+id/category_btn"
+            android:src="@drawable/mis_text_indicator" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

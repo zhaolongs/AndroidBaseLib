@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--标签-->
+    <declare-styleable name="FlagPathView">
+        <!--加载边框-->
+        <attr name="flagWidth" format="dimension"/>
+        <!--转动时间-->
+        <attr name="duration" format="integer"/>
+
+        <!--颜色-->
+        <attr name="flagColor" format="color"/>
+        <attr name="textColor" format="color"/>
+
+
+        <!--加载边框-->
+        <attr name="textSize" format="dimension"/>
+
+    </declare-styleable>
+
+
+    <!--优酷加载进度-->
+    <declare-styleable name="YouKuProgressView">
+        <!--加载进度圈半径-->
+        <attr name="YouKuViewRadius" format="dimension"/>
+        <!--转动时间-->
+        <attr name="YouKuViewDuration" format="integer"/>
+        <!--周期分割-->
+        <attr name="YouKuViewUnitNumber" format="integer"/>
+        <!--颜色-->
+        <attr name="YouKuViewColor1" format="color"/>
+        <attr name="YouKuViewColor2" format="color"/>
+        <!--开始绘制 标识 -->
+        <attr name="YouKuViewBackgrouncIsShow" format="boolean"/>
+
+        <!--显示 加载进度圈背景 标识 -->
+        <attr name="YouKuViewIsDefaultStart" format="boolean"/>
+        <!--加载进度圈背景-->
+        <attr name="YouKuViewBackgrouncColor" format="color"/>
+        <!--加载进度圈背景半径-->
+        <attr name="YouKuViewBackgrouncRx" format="dimension"/>
+        <attr name="YouKuViewBackgrouncRy" format="dimension"/>
+
+    </declare-styleable>
+
+
+    <declare-styleable name="wheelview">
+        <attr name="we_gravity">
+            <enum name="center" value="17"/>
+            <enum name="left" value="3"/>
+            <enum name="right" value="5"/>
+        </attr>
+        <attr name="textColorOut" format="color"/>
+        <attr name="textColorCenter" format="color"/>
+        <attr name="dividerColor" format="color"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="AnimationBottomBar">
+        <attr name="AbBackgruond" format="color"/>
+        <attr name="AbTextSize" format="dimension"/>
+        <attr name="AbTextColor" format="color"/>
+        <attr name="AbSelectTextColor" format="color"/>
+    </declare-styleable>
+
+
+    <!--自定义ImageView属性-->
+    <declare-styleable name="ScaleImageView">
+        <attr name="min_scale_factor" format="float"/>
+        <attr name="max_scale_factor" format="float"/>
+        <attr name="can_back_translate" format="boolean"/>
+        <attr name="can_back_rotate" format="boolean"/>
+        <attr name="can_back_scale" format="boolean"/>
+        <attr name="animator_time" format="integer"/>
+    </declare-styleable>
+
+</resources>

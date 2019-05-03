@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:id="@+id/ll_base_loading_view"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+
+    <ProgressBar
+        android:id="@+id/mon_base_loadingbar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/mon_base_nodata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="加载中"
+        android:textColor="#aaaaaa"
+        android:textSize="14sp" />
+</LinearLayout>
+
