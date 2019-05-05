@@ -23,7 +23,7 @@ public class AesUtils {
 
 
     public static void main(String[] args) throws Exception {
-        //私密
+        //密钥
         String key = "AD2FF87425CA729C";
         //明文
         String content = "{\"password\":\"123456\",\"username\":\"145\"}";
@@ -33,6 +33,7 @@ public class AesUtils {
         System.out.println("" + lEncrypt);
         //解密
         String lDecrypt = AesUtils.decrypt(key, lEncrypt);
+        //还原明文
         System.out.println(lDecrypt);
 
     }
