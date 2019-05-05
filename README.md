@@ -23,3 +23,9 @@ android基础开发包
             System.out.println(lDecrypt);
 
     ```
+    
+#### 新增webview 常用初时化工具
+ 
+    ```java
+        使用  WebViewFunction.getInstance().initWebViewSettings(mWebView, mContext);
+    ```
