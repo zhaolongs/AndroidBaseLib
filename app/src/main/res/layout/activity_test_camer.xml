@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fr_root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
+
+        <Button
+            android:id="@+id/bt_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拍照" />
+
+        <Button
+            android:id="@+id/bt_recamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重拍" />
+
+        <Button
+            android:id="@+id/bt_face_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="前置" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_show_carmera"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="20dp"
+        android:background="#50000000" />
+
+</FrameLayout>

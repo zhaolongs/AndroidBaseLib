@@ -1,1 +1,1 @@
-include ':app', ':androidbaselibrary', ':multi-image-selector'
+include ':app', ':androidbaselibrary', ':multi-image-selector', ':cameralibrary'
