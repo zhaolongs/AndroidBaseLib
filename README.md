@@ -29,3 +29,6 @@ android基础开发包
     ```java
         使用  WebViewFunction.getInstance().initWebViewSettings(mWebView, mContext);
     ```
+    
+    
+#### 新增 自定义像机modlue 
