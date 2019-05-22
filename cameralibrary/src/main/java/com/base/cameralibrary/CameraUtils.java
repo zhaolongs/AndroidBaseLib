@@ -11,31 +11,23 @@ import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.hardware.Camera;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
+
+import com.base.cameralibrary.callback.CameraCallBack;
+import com.base.cameralibrary.callback.CameraInterface;
+import com.base.cameralibrary.view.CameraPreview;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class CameraUtils implements CameraInterface {
 
@@ -67,12 +59,22 @@ public class CameraUtils implements CameraInterface {
         this.mFrameLayout = frameLayout;
         this.mPicWidth = picWidth;
         this.mPicHeight = picHeight;
+        return mCameraUtils;
+    }
+    public void start(){
         if (!checkPermissions(permissions)) {
-            ActivityCompat.requestPermissions((Activity) context, permissions, 0);
+            ActivityCompat.requestPermissions((Activity) mContext, permissions, 0);
         } else {
             openCamer(0);
         }
-        return mCameraUtils;
+    }
+    public void stop(){
+        if (mCamera != null) {
+            mFrameLayout.removeAllViews();
+            mCamera.stopPreview();//停掉原来摄像头的预览
+            mCamera.release();//释放资源
+            mCamera = null;//取消原来摄像头
+        }
     }
 
     private boolean checkPermissions(String[] permissions) {
@@ -85,12 +87,7 @@ public class CameraUtils implements CameraInterface {
     }
 
     private CameraUtils openCamer(int i) {
-        if (mCamera != null) {
-            mFrameLayout.removeAllViews();
-            mCamera.stopPreview();//停掉原来摄像头的预览
-            mCamera.release();//释放资源
-            mCamera = null;//取消原来摄像头
-        }
+        stop();
         //初始化 Camera对象
         mCamera = Camera.open(i);
         //自动连续对焦

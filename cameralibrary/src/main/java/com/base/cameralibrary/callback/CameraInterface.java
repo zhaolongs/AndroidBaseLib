@@ -1,4 +1,4 @@
-package com.base.cameralibrary;
+package com.base.cameralibrary.callback;
 
 public interface CameraInterface {
 

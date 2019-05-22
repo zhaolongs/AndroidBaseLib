@@ -10,3 +10,10 @@
     手机型号： Mi Note3
     Android 版本：7.1.1
 ```
+##### 1.2 vivo手机
+```
+手机版本：Funtouch OS_2.5
+处理器：骁龙615
+手机型号： vivo x6a
+Android 版本：5.0.2
+```

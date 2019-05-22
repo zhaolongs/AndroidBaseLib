@@ -1,4 +1,4 @@
-package com.base.cameralibrary;
+package com.base.cameralibrary.view;
 
 import android.content.Context;
 import android.hardware.Camera;

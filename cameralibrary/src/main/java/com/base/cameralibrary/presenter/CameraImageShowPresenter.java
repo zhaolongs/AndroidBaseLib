@@ -1,11 +1,10 @@
-package com.base.cameralibrary;
+package com.base.cameralibrary.presenter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.AsyncTask;
-import android.os.ParcelUuid;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
