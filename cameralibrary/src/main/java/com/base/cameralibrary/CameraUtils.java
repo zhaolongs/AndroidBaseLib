@@ -14,20 +14,27 @@ import android.hardware.Camera;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.widget.FrameLayout;
 
 import com.base.cameralibrary.callback.CameraCallBack;
 import com.base.cameralibrary.callback.CameraInterface;
+import com.base.cameralibrary.callback.CameraPhotoGraphCallback;
+import com.base.cameralibrary.utils.CameraPhotoFromPhotoAlbum;
 import com.base.cameralibrary.view.CameraPreview;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
 
 public class CameraUtils implements CameraInterface {
 
@@ -417,6 +424,58 @@ public class CameraUtils implements CameraInterface {
         } else {
             mCamera.startPreview();
             this.mTakePictureCount = 0;
+        }
+    }
+
+
+    //相册
+    private Uri mImageUri;
+    private String mMImagePath;
+    public void openCapTureGroupFunction(Context context) {
+        //同样new一个file用于存放照片
+        File imageFile = new File(Environment
+                .getExternalStorageDirectory(), "outputImage.jpg");
+        if (imageFile.exists()) {
+            imageFile.delete();
+        }
+        try {
+            imageFile.createNewFile();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+        }
+        //转换成Uri
+        mImageUri = Uri.fromFile(imageFile);
+        mMImagePath = imageFile.getPath();
+        //开启选择呢绒界面
+        Intent intent = new Intent("android.intent.action.GET_CONTENT");
+        //设置可以缩放
+        intent.putExtra("scale", true);
+        //设置可以裁剪
+        intent.putExtra("crop", false);
+        intent.setType("image/*");
+        //设置输出位置
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
+        //开始选择
+        ((Activity)context).startActivityForResult(intent, 12);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data,Context context,CameraPhotoGraphCallback callback) {
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 12) {
+                try {
+                    String photh = CameraPhotoFromPhotoAlbum.getRealPathFromUri(context, data.getData());
+                    if (callback != null) {
+                        callback.onSuccess(photh);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    if (callback != null) {
+                        callback.onFaile(e.getMessage());
+                    }
+                }
+
+            }
         }
     }
 }
