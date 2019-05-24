@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.base.cameralibrary.activity.CameraExampOpenActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -15,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.camer_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.this.startActivity(new Intent(MainActivity.this,TestCameraActivity.class));
+                MainActivity.this.startActivity(new Intent(MainActivity.this,CameraExampOpenActivity.class));
             }
         });
     }

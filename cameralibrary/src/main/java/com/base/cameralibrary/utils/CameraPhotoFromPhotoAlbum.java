@@ -9,6 +9,8 @@ import android.os.Build;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
+import com.base.cameralibrary.CameraContact;
+
 public class CameraPhotoFromPhotoAlbum {
     /**
      * 根据Uri获取图片的绝对路径

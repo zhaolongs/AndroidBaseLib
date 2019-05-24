@@ -1,2 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.base.cameralibrary" />
+    package="com.base.cameralibrary">
+
+    <application>
+        <activity
+            android:name=".activity.CameraExampOpenActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".activity.CameraExampShowActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+    </application>
+</manifest>
