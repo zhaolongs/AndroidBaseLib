@@ -115,6 +115,13 @@ public class CameraExampOpenActivity extends AppCompatActivity {
                 CameraUtils.getInstance().openCapTureGroupFunction(CameraExampOpenActivity.this);
             }
         });
+        findViewById(R.id.camera_flash).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(LOGTAG, "打开闪光灯");
+                CameraUtils.getInstance().openCameraFlashFunction();
+            }
+        });
 
         mBackLayout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -11,8 +11,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -39,6 +43,8 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
 
     private int mPicWidth;
     private int mPicHeight;
+
+    private boolean openOrClose;
 
     private int mTakePictureCount = 0;
     //是否默认连续拍照
@@ -102,6 +108,18 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
         }
     }
 
+    @Override
+    public void openCameraFlashFunction() {
+        openOrClose = !openOrClose;
+        Camera.Parameters lParameters = mCamera.getParameters();
+        if (openOrClose) {
+            lParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        } else {
+            lParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        }
+        mCamera.setParameters(lParameters);
+    }
+
     private String[] permissions = new String[3];
 
     private void initPicSelectFunction() {
@@ -112,7 +130,7 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
 
     private void openCamer(int i) {
         stop();
-        //初始化 Camera对象
+        //初始化 Camera对
         mCamera = Camera.open(i);
         //自动连续对焦
         Camera.Parameters parameters = mCamera.getParameters();
@@ -164,6 +182,12 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
                 }
             }
         }
+        if (openOrClose) {
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        } else {
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        }
+
         parameters.setPictureSize(mPicWidth, mPicHeight);
         try {
             mCamera.setParameters(parameters);

@@ -20,5 +20,11 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(new Intent(MainActivity.this,CameraExampOpenActivity.class));
             }
         });
+        findViewById(R.id.tv_auto_scaner).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.startActivity(new Intent(MainActivity.this,TestAutoScannerViewActivity.class));
+            }
+        });
     }
 }

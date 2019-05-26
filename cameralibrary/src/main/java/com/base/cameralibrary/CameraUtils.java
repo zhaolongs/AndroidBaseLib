@@ -102,4 +102,8 @@ public class CameraUtils implements CameraContact.CommonCameraInterface {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data, Context context, CameraPhotoGraphCallback callback) {
         mCameraPhotoPresenter.onActivityResult(requestCode,resultCode,data,context,callback);
     }
+    @Override
+    public void openCameraFlashFunction() {
+        mCameraOpenPresenter.openCameraFlashFunction();
+    }
 }

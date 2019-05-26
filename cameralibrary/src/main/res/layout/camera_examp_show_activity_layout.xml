@@ -23,19 +23,47 @@
         android:visibility="visible" />
 
     <LinearLayout
-        android:id="@+id/ll_base_back"
-        android:layout_width="50dp"
-        android:layout_height="44dp"
-        android:gravity="center_vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/aliyun_back"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_base_back"
+            android:layout_width="50dp"
+            android:layout_height="44dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/aliyun_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:padding="5dp"
+                android:src="@mipmap/camera_white_back_icon" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:padding="5dp"
-            android:src="@mipmap/camera_white_back_icon" />
+            android:layout_weight="1"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_base_next"
+            android:layout_width="50dp"
+            android:layout_height="44dp"
+            android:layout_gravity="right"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:padding="5dp"
+                android:src="@mipmap/camera_record_finish" />
+        </LinearLayout>
     </LinearLayout>
 
 

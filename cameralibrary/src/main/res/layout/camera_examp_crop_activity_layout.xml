@@ -7,7 +7,7 @@
     tools:ignore="HardcodedText"
     android:orientation="vertical">
 
-    <com.studyyoun.androidbaselibrary.view.CropLayout
+    <com.base.cameralibrary.view.CropLayout
         android:id="@+id/cropLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/ic_material_ripple"
+            android:background="@drawable/camera_examp_crop_ripple"
             android:gravity="center"
             android:onClick="onClick"
             android:text="确定"
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/ic_material_ripple"
+            android:background="@drawable/camera_examp_crop_ripple"
             android:gravity="center"
             android:onClick="onClick"
             android:text="取消"

@@ -1,5 +1,6 @@
 package com.base.cameralibrary.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -38,6 +39,15 @@ public class CameraExampShowActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CameraExampShowActivity.this.finish();
+            }
+        });
+
+        findViewById(R.id.ll_base_next).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent lIntent = new Intent(CameraExampShowActivity.this, CameraExampCorpActivity.class);
+                lIntent.putExtra("imageUrl", lImageUrl);
+                CameraExampShowActivity.this.startActivity(lIntent);
             }
         });
     }

@@ -43,6 +43,8 @@ public interface CameraContact {
 
         //相册选图回调
         void onActivityResult(int requestCode, int resultCode, @Nullable Intent data, Context context, CameraPhotoGraphCallback callback);
+
+        void openCameraFlashFunction();
     }
 
     interface CameraPresenter {
@@ -50,7 +52,7 @@ public interface CameraContact {
         void start();
         void reCameraClick();
         void onCameraClick();
-
+        void openCameraFlashFunction();
     }
 
     //打开相册

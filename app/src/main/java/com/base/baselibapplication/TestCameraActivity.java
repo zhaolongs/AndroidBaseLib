@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.base.cameralibrary.activity.CameraExampCorpActivity;
 import com.base.cameralibrary.callback.CameraCallBack;
 import com.base.cameralibrary.presenter.CameraImageShowPresenter;
 import com.base.cameralibrary.CameraUtils;
@@ -76,7 +77,7 @@ public class TestCameraActivity extends AppCompatActivity {
                     Toast.makeText(TestCameraActivity.this, "请拍照", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent lIntent = new Intent(TestCameraActivity.this, CorpCameraActivity.class);
+                Intent lIntent = new Intent(TestCameraActivity.this, CameraExampCorpActivity.class);
                 lIntent.putExtra("imageUrl", mFilePath);
                 TestCameraActivity.this.startActivity(lIntent);
             }

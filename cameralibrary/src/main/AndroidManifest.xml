@@ -10,5 +10,10 @@
             android:name=".activity.CameraExampShowActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".activity.CameraExampCorpActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
     </application>
 </manifest>

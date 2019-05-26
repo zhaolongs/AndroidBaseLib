@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".TestCameraActivity" />
-        <activity android:name=".CorpCameraActivity" />
+        <activity android:name=".TestAutoScannerViewActivity" />
+
     </application>
 
 </manifest>
