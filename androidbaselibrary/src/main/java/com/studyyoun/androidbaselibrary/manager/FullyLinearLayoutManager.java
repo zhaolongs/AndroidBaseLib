@@ -5,14 +5,15 @@ package com.studyyoun.androidbaselibrary.manager;
  * 落在谷底，思人生
  */
 
-import android.content.*;
-import android.graphics.*;
-import android.support.v4.view.*;
-import android.support.v7.widget.*;
-import android.util.Log;
-import android.view.*;
+import android.content.Context;
+import android.graphics.Rect;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
-import java.lang.reflect.*;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+
+import java.lang.reflect.Field;
 /**
  * class infation
  */

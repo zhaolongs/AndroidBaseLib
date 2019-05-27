@@ -1,4 +1,4 @@
-package com.base.baselibapplication;
+package com.base.baselibapplication.test.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +9,18 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.base.baselibapplication.R;
+import com.base.cameralibrary.CameraUtils;
 import com.base.cameralibrary.activity.CameraExampCorpActivity;
 import com.base.cameralibrary.callback.CameraCallBack;
 import com.base.cameralibrary.presenter.CameraImageShowPresenter;
-import com.base.cameralibrary.CameraUtils;
 import com.studyyoun.androidbaselibrary.utils.LogUtils;
 
-public class TestCameraActivity extends AppCompatActivity {
+/**
+ * 自定义相机使用案例
+ * 选择相册使用案例
+ */
+public class TestCustomCameraActivity extends AppCompatActivity {
 
     private ImageView mShowImageViw;
     private CameraUtils mCameraUtils;
@@ -23,7 +28,7 @@ public class TestCameraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_camer);
+        setContentView(R.layout.zl_test_custom_camera_activity_layout);
 
         FrameLayout rootView = findViewById(R.id.fr_root_view);
         mShowImageViw = findViewById(R.id.iv_show_carmera);
@@ -47,7 +52,7 @@ public class TestCameraActivity extends AppCompatActivity {
 
             @Override
             public void cameraPermisExit() {
-                TestCameraActivity.this.finish();
+                TestCustomCameraActivity.this.finish();
             }
         });
 
@@ -74,12 +79,12 @@ public class TestCameraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mFilePath == null) {
-                    Toast.makeText(TestCameraActivity.this, "请拍照", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TestCustomCameraActivity.this, "请拍照", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent lIntent = new Intent(TestCameraActivity.this, CameraExampCorpActivity.class);
+                Intent lIntent = new Intent(TestCustomCameraActivity.this, CameraExampCorpActivity.class);
                 lIntent.putExtra("imageUrl", mFilePath);
-                TestCameraActivity.this.startActivity(lIntent);
+                TestCustomCameraActivity.this.startActivity(lIntent);
             }
         });
 

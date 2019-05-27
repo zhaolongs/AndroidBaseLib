@@ -1,26 +1,52 @@
 package com.studyyoun.androidbaselibrary.utils;
 
-import android.annotation.*;
-import android.content.*;
-import android.content.res.*;
-import android.graphics.*;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
-import android.graphics.drawable.*;
-import android.media.*;
-import android.os.*;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.LinearGradient;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.PixelFormat;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
+import android.os.Build;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
-import android.util.*;
-import android.view.*;
+import android.util.Log;
+import android.view.View;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.ref.SoftReference;
 
-import java.io.*;
-import java.lang.ref.*;
-
-import static android.graphics.Bitmap.*;
-import static android.graphics.PorterDuff.*;
+import static android.graphics.Bitmap.CompressFormat;
+import static android.graphics.Bitmap.createBitmap;
+import static android.graphics.Bitmap.createScaledBitmap;
+import static android.graphics.PorterDuff.Mode;
 
 /**
  * Created by androidlongs on 17/4/7.

@@ -1,20 +1,14 @@
 package com.studyyoun.androidbaselibrary.okhttp.client;
 
-import android.text.TextUtils;
-import android.util.Base64;
-
-import com.alibaba.fastjson.JSON;
 import com.studyyoun.androidbaselibrary.model.RequestModel;
 import com.studyyoun.androidbaselibrary.okhttp.callback.OkhttpCommonCallBack;
 import com.studyyoun.androidbaselibrary.okhttp.callback.OkhttpNormalCallBack;
 import com.studyyoun.androidbaselibrary.okhttp.https.HttpsUtils;
 import com.studyyoun.androidbaselibrary.okhttp.qequest.OkhttpCommonRequest;
 import com.studyyoun.androidbaselibrary.utils.FastJsonUtil;
-import com.studyyoun.androidbaselibrary.utils.LogUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;

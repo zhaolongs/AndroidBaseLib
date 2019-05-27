@@ -34,7 +34,6 @@ import com.studyyoun.androidbaselibrary.view.CustomShareLoadingView;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;

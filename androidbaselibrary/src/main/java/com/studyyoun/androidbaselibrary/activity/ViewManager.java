@@ -3,7 +3,6 @@ package com.studyyoun.androidbaselibrary.activity;
 import android.app.Application;
 import android.content.Context;
 
-
 import com.studyyoun.androidbaselibrary.base.IBaseInterface;
 import com.studyyoun.androidbaselibrary.utils.ObjectUtil;
 

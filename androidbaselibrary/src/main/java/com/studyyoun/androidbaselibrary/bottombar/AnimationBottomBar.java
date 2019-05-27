@@ -8,7 +8,6 @@ package com.studyyoun.androidbaselibrary.bottombar;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -22,7 +21,6 @@ import android.view.animation.Transformation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 
 import com.studyyoun.androidbaselibrary.R;
 

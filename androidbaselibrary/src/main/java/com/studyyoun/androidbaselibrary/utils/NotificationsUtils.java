@@ -4,11 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
-import com.studyyoun.androidbaselibrary.R;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

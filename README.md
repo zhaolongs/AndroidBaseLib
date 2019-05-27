@@ -73,3 +73,12 @@ android基础开发包
     //隐藏提示框
     LoadingDialogUtils.getInstance().dismiss();
     ```
+    
+    
+   #### 自定义View系列
+    
+    ```
+     com.studyyoun.androidbaselibrary.view 包下
+    1 AutoScannerView 仿微信上下扫一扫
+    2 LoadingView 仿苹果 圆形菊花加载提示
+    ```

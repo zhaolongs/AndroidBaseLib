@@ -1,7 +1,9 @@
 package com.studyyoun.androidbaselibrary.adapter;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +17,18 @@ import java.util.List;
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> implements View.OnClickListener {
 
     private Context mContext;
-    private List<T> mData;
+    protected List<T> mData;
     private int mLayoutId;
 
     private OnItemClickListener mListener;
-
+    private Point mScreenPoint = new Point();
     public BaseRecyclerViewAdapter(Context context, List<T> data, int layoutId) {
         this.mContext = context;
         this.mData = data;
         this.mLayoutId = layoutId;
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        mScreenPoint.x = displayMetrics.widthPixels;
+        mScreenPoint.y = displayMetrics.heightPixels;
     }
 
     @Override
@@ -77,5 +82,30 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
          * @param position The position of the view in the adapter.
          */
         void onItemClick(RecyclerView.Adapter adapter, View v, int position);
+    }
+
+    /**
+     * 刷新数据
+     *
+     * @param list
+     */
+    public void refreshData(List<T> list) {
+        this.mData.clear();
+        this.mData.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 添加数据
+     *
+     * @param list
+     */
+    public void addMoreData(List<T> list) {
+        this.mData.addAll(list);
+        notifyItemRangeInserted(this.mData.size() - list.size(), list.size());
+    }
+
+    public List<T> getData() {
+        return mData;
     }
 }

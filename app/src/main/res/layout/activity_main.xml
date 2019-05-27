@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,5 +19,37 @@
         android:layout_height="44dp"
         android:gravity="center"
         android:text="仿微信扫描view " />
+    <TextView
+        android:id="@+id/tv_video_page"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="仿抖音上下切换播放视频页面效果 " />
+    <TextView
+        android:id="@+id/tv_pic_page"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="仿抖音上下切换页面效果 " />
+    <TextView
+        android:id="@+id/tv_data_page"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="RecyclerView 数据加载封装 " />
+
+
+    <TextView
+        android:id="@+id/tv_video_play"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="视频播放相关" />
+    <TextView
+        android:id="@+id/tv_video_zxing"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="扫一扫功能" />
 
 </LinearLayout>

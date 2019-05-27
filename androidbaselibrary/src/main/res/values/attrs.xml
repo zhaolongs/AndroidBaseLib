@@ -75,4 +75,5 @@
         <attr name="animator_time" format="integer"/>
     </declare-styleable>
 
+
 </resources>

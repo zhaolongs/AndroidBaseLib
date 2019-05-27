@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 
 import com.studyyoun.androidbaselibrary.activity.ViewManager;
-import com.studyyoun.androidbaselibrary.utils.LogUtils;
 import com.studyyoun.androidbaselibrary.utils.ToastUtils;
 
 public class BaseApplication extends Application {

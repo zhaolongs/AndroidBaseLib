@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000">
+
+
+    <com.base.scanlistlibrary.scanlist.ScanVideoPlayView
+        android:id="@+id/vote_video_play"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="74dp">
+
+        <ImageView
+            android:id="@+id/vote_video_list_back"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="16dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/edit_voide_close"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

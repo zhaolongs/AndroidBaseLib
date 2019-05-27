@@ -16,9 +16,52 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestCameraActivity" />
-        <activity android:name=".TestAutoScannerViewActivity" />
-
+        <activity android:name=".test.activity.TestCustomCameraActivity" />
+        <activity android:name=".test.activity.TestAutoScannerViewActivity" />
+        <activity android:name=".test.activity.TestVideoPageListActivity" />
+        <activity android:name=".example.VideoMainActivity" />
+        <activity
+            android:name=".example.TinyWindowPlayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="可使用小窗口模式播放"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".example.RecyclerViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="在RecylerView视频列表中"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".example.ChangeClarityActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="在全屏时可以切换清晰度"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".example.UseInFragActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="在fragment中使用"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".example.ProcessHome1Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Activity中时处理播放时按下Home键"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".example.ProcessHome2Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="Fragment中时处理播放时按下Home键"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".zxing.DefaultCaptureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".zxing.ZxingMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".zxing.WeChatCaptureActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".zxing.AliCaptureActivity"></activity>
+        <activity android:name=".test.activity.TestPicPageListActivity" />
+        <activity android:name=".test.activity.TestRecyclerViewActivity" />
     </application>
 
 </manifest>
