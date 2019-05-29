@@ -17,8 +17,8 @@ import java.util.List;
 
 /**
  * RecyclerView 数据加载封装使用 案例
- *  支持下拉刷新
- *  支持上拉加载更多
+ * 支持下拉刷新
+ * 支持上拉加载更多
  */
 public class TestRecyclerViewActivity extends CommonBaseActivity {
     private ScanVideoPlayView videoPlayView;
@@ -56,7 +56,7 @@ public class TestRecyclerViewActivity extends CommonBaseActivity {
 
 
         List<TestVideoListBean> lTestVideoListBeans = new ArrayList<>();
-        for (int lI = 0; lI < 1; lI++) {
+        for (int lI = 0; lI < 0; lI++) {
             TestVideoListBean lTestVideoListBean = new TestVideoListBean();
             lTestVideoListBean.title = System.currentTimeMillis() + " 初始化数据";
             lTestVideoListBeans.add(lTestVideoListBean);
@@ -98,7 +98,7 @@ public class TestRecyclerViewActivity extends CommonBaseActivity {
          *  初始化 videoPlayView 传入数据适配 Adapter Adapter需要继承于BaseRecyclerViewAdapter
          *
          */
-        videoPlayView.initPlayListView(lLittleVideoListAdapter, false);
+        videoPlayView.initPlayListView(lLittleVideoListAdapter, R.layout.vote_activity_candidate_nodata_layout, false);
     }
 
     @Override

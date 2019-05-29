@@ -137,7 +137,7 @@ public class TestVideoPageListActivity extends CommonBaseActivity {
         /**
          * 初始化 videoPlayView 传入数据适配 Adapter Adapter需要继承于BaseRecyclerViewAdapter
          */
-        videoPlayView.initPlayListView(lLittleVideoListAdapter,true);
+        videoPlayView.initPlayListView(lLittleVideoListAdapter,0,true);
     }
 
     @Override

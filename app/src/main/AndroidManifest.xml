@@ -62,6 +62,7 @@
         <activity android:name=".zxing.AliCaptureActivity"></activity>
         <activity android:name=".test.activity.TestPicPageListActivity" />
         <activity android:name=".test.activity.TestRecyclerViewActivity" />
+        <activity android:name=".test.activity.TestRecyclerViewMvpActivity" />
     </application>
 
 </manifest>

@@ -24,6 +24,7 @@ public class DemoFragenment extends Fragment {
 
     private RecyclerView mRecyclerView;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.layout_fragment_demo, container, false);

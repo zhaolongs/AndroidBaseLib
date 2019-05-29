@@ -9,6 +9,7 @@ import com.base.baselibapplication.example.VideoMainActivity;
 import com.base.baselibapplication.test.activity.TestAutoScannerViewActivity;
 import com.base.baselibapplication.test.activity.TestRecyclerViewActivity;
 import com.base.baselibapplication.test.activity.TestPicPageListActivity;
+import com.base.baselibapplication.test.activity.TestRecyclerViewMvpActivity;
 import com.base.baselibapplication.test.activity.TestVideoPageListActivity;
 import com.base.baselibapplication.zxing.ZxingMainActivity;
 import com.base.cameralibrary.activity.CameraExampOpenActivity;
@@ -48,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.this.startActivity(new Intent(MainActivity.this, TestRecyclerViewActivity.class));
+            }
+        });
+        findViewById(R.id.tv_data2_page).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.startActivity(new Intent(MainActivity.this, TestRecyclerViewMvpActivity.class));
             }
         });
         findViewById(R.id.tv_video_play).setOnClickListener(new View.OnClickListener() {

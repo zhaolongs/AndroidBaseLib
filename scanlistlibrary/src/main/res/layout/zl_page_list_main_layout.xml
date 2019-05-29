@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.base.scanlistlibrary.scanlist.ScanSwipeRefreshLayout
+        android:id="@+id/zl_page_list_main_refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.base.scanlistlibrary.scanlist.ScanRecyclerView
+            android:id="@+id/zl_page_list_main_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+    </com.base.scanlistlibrary.scanlist.ScanSwipeRefreshLayout>
+
+    <FrameLayout
+        android:id="@+id/zl_page_list_main_empty_rootview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/zl_page_list_main_empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00f8f8f8"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/zl_page_tv_main_empty_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无数据"
+                android:textColor="#c4c4c4"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </FrameLayout>
+</merge>
