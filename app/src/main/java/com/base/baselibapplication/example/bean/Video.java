@@ -1,7 +1,7 @@
 package com.base.baselibapplication.example.bean;
 
 /**
- * Created by XiaoJianjun on 2017/5/21.
+ * Created by zhaolong on 2017/5/21.
  * 视频
  */
 public class Video {

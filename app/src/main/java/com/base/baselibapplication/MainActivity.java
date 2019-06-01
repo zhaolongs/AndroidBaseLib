@@ -7,9 +7,11 @@ import android.view.View;
 
 import com.base.baselibapplication.example.VideoMainActivity;
 import com.base.baselibapplication.test.activity.TestAutoScannerViewActivity;
+import com.base.baselibapplication.test.activity.TestGirdPicPageListActivity;
 import com.base.baselibapplication.test.activity.TestRecyclerViewActivity;
 import com.base.baselibapplication.test.activity.TestPicPageListActivity;
 import com.base.baselibapplication.test.activity.TestRecyclerViewMvpActivity;
+import com.base.baselibapplication.test.activity.TestStagPicPageListActivity;
 import com.base.baselibapplication.test.activity.TestVideoPageListActivity;
 import com.base.baselibapplication.zxing.ZxingMainActivity;
 import com.base.cameralibrary.activity.CameraExampOpenActivity;
@@ -45,6 +47,20 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(new Intent(MainActivity.this, TestPicPageListActivity.class));
             }
         });
+        findViewById(R.id.tv_data_gird_page).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.startActivity(new Intent(MainActivity.this, TestGirdPicPageListActivity.class));
+            }
+        });
+        findViewById(R.id.tv_data_stage_page).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.startActivity(new Intent(MainActivity.this, TestStagPicPageListActivity.class));
+            }
+        });
+
+
         findViewById(R.id.tv_data_page).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -11,7 +11,7 @@ import com.base.scanlistlibrary.videoplay.TxVideoPlayerController;
 import com.bumptech.glide.Glide;
 
 /**
- * Created by XiaoJianjun on 2017/5/21.
+ * Created by zhaolong on 2017/5/21.
  */
 
 public class VideoViewHolder extends RecyclerView.ViewHolder {

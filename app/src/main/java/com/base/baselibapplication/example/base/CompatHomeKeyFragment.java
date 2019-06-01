@@ -8,7 +8,7 @@ import android.view.View;
 ;import com.base.scanlistlibrary.videoplay.NiceVideoPlayerManager;
 
 /**
- * Created by XiaoJianjun on 2017/7/7.
+ * Created by zhaolong on 2017/7/7.
  * 在此Fragment中，如果视频正在播放或缓冲，按下Home键，暂停视频播放，回到此Fragment后继续播放视频；
  * 如果离开次Fragment（跳转到其他Activity或按下Back键），则释放视频播放器
  */

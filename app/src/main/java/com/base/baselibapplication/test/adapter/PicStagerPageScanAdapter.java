@@ -17,12 +17,12 @@ import java.util.List;
  *
  * @author zhaolong
  */
-public class PicPageScanAdapter extends ScanBaseRecyclerViewAdapter<TestVideoListBean> {
-    public static final String TAG = PicPageScanAdapter.class.getSimpleName();
+public class PicStagerPageScanAdapter extends ScanBaseRecyclerViewAdapter<TestVideoListBean> {
+    public static final String TAG = PicStagerPageScanAdapter.class.getSimpleName();
 
     public Context mContext;
-    public PicPageScanAdapter(Context context, List<TestVideoListBean> data, int layoutId) {
-        super(context, data, layoutId);
+    public PicStagerPageScanAdapter(Context context, List<TestVideoListBean> data, int layoutId) {
+        super(context, data, layoutId,2);
         mContext = context;
     }
 

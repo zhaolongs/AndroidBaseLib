@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000">
+    android:background="#f5f5f5">
 
 
     <com.base.scanlistlibrary.scanlist.ScanVideoPlayView
@@ -29,5 +29,30 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/test_video_list_tv_page"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#f74242" />
+
+
+        <Button
+            android:id="@+id/test_video_list_bt_update_all_page"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="#00000000"
+            android:text="更新all"
+            android:textColor="#f74242" />
+    </LinearLayout>
 
 </FrameLayout>

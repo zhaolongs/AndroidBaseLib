@@ -14,7 +14,7 @@ import com.base.scanlistlibrary.videoplay.TxVideoPlayerController;
 import java.util.List;
 
 /**
- * Created by XiaoJianjun on 2017/5/21.
+ * Created by zhaolong on 2017/5/21.
  */
 
 public class VideoAdapter extends RecyclerView.Adapter<VideoViewHolder> {

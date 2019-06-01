@@ -38,6 +38,18 @@
         android:gravity="center"
         android:text="RecyclerView 数据加载封装 " />
     <TextView
+        android:id="@+id/tv_data_gird_page"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="RecyclerView 九宫格 封装 " />
+    <TextView
+        android:id="@+id/tv_data_stage_page"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="RecyclerView 瀑布流 封装 " />
+    <TextView
         android:id="@+id/tv_data2_page"
         android:layout_width="match_parent"
         android:layout_height="44dp"

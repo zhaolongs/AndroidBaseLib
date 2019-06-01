@@ -2,15 +2,20 @@ package com.base.baselibapplication.test.activity;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.base.baselibapplication.R;
 import com.base.baselibapplication.test.bean.TestVideoListBean;
 import com.base.baselibapplication.test.adapter.PicPageScanAdapter;
+import com.base.scanlistlibrary.base.ScanBaseRecyclerViewAdapter;
 import com.base.scanlistlibrary.base.ScanContact;
+import com.base.scanlistlibrary.base.ScanRecyclerViewHolder;
 import com.base.scanlistlibrary.scanlist.ScanVideoPlayView;
 import com.studyyoun.androidbaselibrary.activity.CommonBaseActivity;
 import com.studyyoun.androidbaselibrary.utils.CommonViewOnClickLiserner;
+import com.studyyoun.androidbaselibrary.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +27,9 @@ public class TestPicPageListActivity extends CommonBaseActivity {
     private ScanVideoPlayView videoPlayView;
 
     private ImageView mBackImageView;
+    private TextView mPageIndexTextView;
+    private Button mUpdateAllButon;
+    private PicPageScanAdapter mLittleVideoListAdapter;
 
     @Override
     protected void getAllIntentExtraDatas(Intent intent) {
@@ -37,6 +45,8 @@ public class TestPicPageListActivity extends CommonBaseActivity {
     protected void commonInitView(View view) {
         videoPlayView = findViewById(R.id.vote_video_play);
         mBackImageView = findViewById(R.id.vote_video_list_back);
+        mPageIndexTextView = findViewById(R.id.test_video_list_tv_page);
+        mUpdateAllButon = findViewById(R.id.test_video_list_bt_update_all_page);
     }
 
     @Override
@@ -52,17 +62,39 @@ public class TestPicPageListActivity extends CommonBaseActivity {
                 TestPicPageListActivity.this.finish();
             }
         });
+        mUpdateAllButon.setOnClickListener(new CommonViewOnClickLiserner() {
+            @Override
+            public void onCommonClick(View v) {
+                if (mLittleVideoListAdapter != null) {
+                    mLittleVideoListAdapter.notifyDataSetChanged();
+                }
+            }
+        });
 
 
         List<TestVideoListBean> lTestVideoListBeans = new ArrayList<>();
-        for (int lI = 0; lI < 10; lI++) {
+        for (int lI = 0; lI < 1; lI++) {
             TestVideoListBean lTestVideoListBean = new TestVideoListBean();
             lTestVideoListBean.title = System.currentTimeMillis() + " 初始化数据";
             lTestVideoListBeans.add(lTestVideoListBean);
         }
 
-        PicPageScanAdapter lLittleVideoListAdapter = new PicPageScanAdapter(this, lTestVideoListBeans, R.layout.item_list_page_pic_layout);
+        mLittleVideoListAdapter = new PicPageScanAdapter(this, lTestVideoListBeans, R.layout.item_list_page_pic_layout);
+        videoPlayView.setOnPageSelectListener(new ScanContact.OnPageSelectListener() {
+            @Override
+            public void onPageSelected(int position, Object bean, ScanBaseRecyclerViewAdapter adapter, ScanRecyclerViewHolder holder) {
+                LogUtils.d("onPageSelected "+position+"  holder "+ holder);
+                mPageIndexTextView.setText("s"+position);
+                TestVideoListBean lTestVideoListBean = (TestVideoListBean) bean;
+                lTestVideoListBean.title="su "+System.currentTimeMillis();
+                mLittleVideoListAdapter.notifyItemChanged(position);
+            }
 
+            @Override
+            public void onPageRelease(int position, Object o, ScanBaseRecyclerViewAdapter adapter, ScanRecyclerViewHolder holder) {
+
+            }
+        });
 
         /**
          * 设置 videoPlayView 下拉刷新 与上拉加载更多监听
@@ -77,12 +109,14 @@ public class TestPicPageListActivity extends CommonBaseActivity {
                     lTestVideoListBean.title = System.currentTimeMillis() + " 下拉刷新 ";
                     refreshList.add(lTestVideoListBean);
                 }
+                LogUtils.d("下拉刷新 ");
                 videoPlayView.refreshVideoList(refreshList);
             }
 
             @Override
             public void onLoadMore() {
                 //上拉加载更多
+                LogUtils.d("上拉加载更多 ");
                 List<TestVideoListBean> moreList = new ArrayList<>();
                 for (int lI = 0; lI < 40; lI++) {
                     TestVideoListBean lTestVideoListBean = new TestVideoListBean();
@@ -96,7 +130,7 @@ public class TestPicPageListActivity extends CommonBaseActivity {
         /**
          * 初始化 videoPlayView 传入数据适配 Adapter Adapter需要继承于BaseRecyclerViewAdapter
          */
-        videoPlayView.initPlayListView(lLittleVideoListAdapter,0,true);
+        videoPlayView.initPlayListView(mLittleVideoListAdapter,1,0,true);
     }
 
     @Override

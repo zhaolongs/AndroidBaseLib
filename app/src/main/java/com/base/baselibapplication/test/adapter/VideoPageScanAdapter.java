@@ -38,9 +38,9 @@ public class VideoPageScanAdapter extends ScanBaseRecyclerViewAdapter<TestVideoL
         TestVideoListBean lBean= (TestVideoListBean) bean;
         controller.setTitle(lBean.title);
         controller.setLenght(lBean.length);
-        Glide.with(mContext)
-                .load(lBean.imageUrl)
-                .into(controller.imageView());
+//        Glide.with(mContext)
+//                .load(lBean.imageUrl)
+//                .into(controller.imageView());
         lNiceVideoPlayer.setUp(lBean.videoUrl, null);
     }
 }

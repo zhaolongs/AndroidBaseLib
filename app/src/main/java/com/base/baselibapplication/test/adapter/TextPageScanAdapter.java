@@ -17,22 +17,18 @@ import java.util.List;
  *
  * @author zhaolong
  */
-public class PicPageScanAdapter extends ScanBaseRecyclerViewAdapter<TestVideoListBean> {
-    public static final String TAG = PicPageScanAdapter.class.getSimpleName();
+public class TextPageScanAdapter extends ScanBaseRecyclerViewAdapter<TestVideoListBean> {
+    public static final String TAG = TextPageScanAdapter.class.getSimpleName();
 
     public Context mContext;
-    public PicPageScanAdapter(Context context, List<TestVideoListBean> data, int layoutId) {
+    public TextPageScanAdapter(Context context, List<TestVideoListBean> data, int layoutId) {
         super(context, data, layoutId);
         mContext = context;
     }
 
     @Override
     protected void onBindData(ScanRecyclerViewHolder holder, TestVideoListBean bean, int position) {
-        ImageView lView = (ImageView) holder.getView(R.id.test_video_list_iv_page);
-        String url = "http://b-ssl.duitang.com/uploads/blog/201409/11/20140911024410_nX8Gs.jpeg";
-        CommonGlideUtils.showImageView(mContext,R.mipmap.toast_error,url,lView);
-
-        TextView lTextView = (TextView) holder.getView(R.id.test_video_list_tv_page);
+        TextView lTextView = (TextView) holder.getView(R.id.test_video_list_page);
         lTextView.setText(""+bean.title);
     }
 }

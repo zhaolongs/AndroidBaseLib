@@ -13,6 +13,7 @@ import com.base.scanlistlibrary.base.ScanBaseRecyclerViewAdapter;
 import com.base.scanlistlibrary.base.ScanContact;
 import com.base.scanlistlibrary.base.ScanRecyclerViewHolder;
 import com.base.scanlistlibrary.scanlist.ScanVideoPlayView;
+import com.base.scanlistlibrary.videoplay.LogUtil;
 import com.base.scanlistlibrary.videoplay.NiceVideoPlayer;
 import com.base.scanlistlibrary.videoplay.NiceVideoPlayerManager;
 import com.studyyoun.androidbaselibrary.activity.CommonBaseActivity;
@@ -69,6 +70,27 @@ public class TestVideoPageListActivity extends CommonBaseActivity {
 
         VideoPageScanAdapter lLittleVideoListAdapter = new VideoPageScanAdapter(this, lTestVideoListBeans, R.layout.item_candidate_ticket_layout);
 
+        videoPlayView.setOnPageSelectListener(new ScanContact.OnPageSelectListener() {
+            @Override
+            public void onPageSelected(int position, Object bean, ScanBaseRecyclerViewAdapter adapter, ScanRecyclerViewHolder holder) {
+                LogUtils.d("onPageSelected  "+position);
+                NiceVideoPlayer lNiceVideoPlayer = (NiceVideoPlayer) holder.getView(R.id.nice_video_player);
+                TestVideoListBean lBean= (TestVideoListBean) bean;
+                lNiceVideoPlayer.setUp(lBean.videoUrl, null);
+                lNiceVideoPlayer.start();
+            }
+
+            @Override
+            public void onPageRelease(int position, Object o, ScanBaseRecyclerViewAdapter adapter, ScanRecyclerViewHolder holder) {
+                if (holder != null) {
+                    NiceVideoPlayer lNiceVideoPlayer = (NiceVideoPlayer) holder.getView(R.id.nice_video_player);
+                    if (lNiceVideoPlayer.isPlaying()) {
+                        LogUtils.d("onPageRelease  isPlaying");
+                        lNiceVideoPlayer.release();
+                    }
+                }
+            }
+        });
 
         /**
          * 设置 videoPlayView 下拉刷新 与上拉加载更多监听
@@ -99,30 +121,7 @@ public class TestVideoPageListActivity extends CommonBaseActivity {
             }
         });
 
-        videoPlayView.setOnPageSelectListener(new ScanContact.OnPageSelectListener() {
-            @Override
-            public void onPageSelected(int position, Object bean, ScanBaseRecyclerViewAdapter adapter, ScanRecyclerViewHolder holder) {
 
-                if (holder != null) {
-                    NiceVideoPlayer lNiceVideoPlayer = (NiceVideoPlayer) holder.getView(R.id.nice_video_player);
-                    //lNiceVideoPlayer.start();
-                    LogUtils.d("lNiceVideoPlayer.start();");
-                }
-
-            }
-
-            @Override
-            public void onPageRelease(int position, Object o, ScanBaseRecyclerViewAdapter adapter, ScanRecyclerViewHolder holder) {
-                LogUtils.d("onPageRelease " + position);
-                if (holder != null) {
-                    NiceVideoPlayer lNiceVideoPlayer = (NiceVideoPlayer) holder.getView(R.id.nice_video_player);
-                    if (lNiceVideoPlayer.isPlaying()) {
-                        LogUtils.d("onPageRelease  isPlaying");
-                        lNiceVideoPlayer.release();
-                    }
-                }
-            }
-        });
 
         videoPlayView.setOnRecyclerListener(new RecyclerView.RecyclerListener() {
             @Override

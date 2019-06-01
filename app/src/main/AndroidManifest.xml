@@ -18,7 +18,10 @@
         </activity>
         <activity android:name=".test.activity.TestCustomCameraActivity" />
         <activity android:name=".test.activity.TestAutoScannerViewActivity" />
-        <activity android:name=".test.activity.TestVideoPageListActivity" />
+        <activity
+            android:name=".test.activity.TestVideoPageListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
         <activity android:name=".example.VideoMainActivity" />
         <activity
             android:name=".example.TinyWindowPlayActivity"
@@ -63,6 +66,8 @@
         <activity android:name=".test.activity.TestPicPageListActivity" />
         <activity android:name=".test.activity.TestRecyclerViewActivity" />
         <activity android:name=".test.activity.TestRecyclerViewMvpActivity" />
+        <activity android:name=".test.activity.TestGirdPicPageListActivity" />
+        <activity android:name=".test.activity.TestStagPicPageListActivity" />
     </application>
 
 </manifest>

@@ -18,7 +18,7 @@ import com.base.scanlistlibrary.videoplay.NiceVideoPlayerManager;
 
 
 /**
- * Created by XiaoJianjun on 2017/7/7.
+ * Created by zhaolong on 2017/7/7.
  * 如果你需要在播放的时候按下Home键能暂停，回调此Fragment又继续的话，需要继承自CompatHomeKeyFragment
  */
 public class DemoProcessHomeKeyFragenment extends CompatHomeKeyFragment {
