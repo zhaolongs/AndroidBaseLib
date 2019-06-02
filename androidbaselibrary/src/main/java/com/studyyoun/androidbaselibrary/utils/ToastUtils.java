@@ -62,7 +62,7 @@ public class ToastUtils {
 
 
     public static void onSuccessShowToast(String message) {
-//        showToast(message, R.mipmap.toast_success,
+//        showToast(message, R.mipmap.ab_toast_success,
 //                ContextCompat.getColor(mContext, R.color.toastDefaultTextColor),
 //                Toast.LENGTH_SHORT, true, R.drawable.toast_success_shape);
         if (currentToast == null) {
@@ -74,7 +74,7 @@ public class ToastUtils {
 
     public static void onSuccessShowToast(int messageID) {
         String message = mContext.getResources().getString(messageID);
-        showToast(message, R.mipmap.toast_success,
+        showToast(message, R.mipmap.ab_toast_success,
                 ContextCompat.getColor(mContext, R.color.toastDefaultTextColor),
                 Toast.LENGTH_SHORT, true, R.drawable.toast_success_shape);
     }
@@ -106,27 +106,27 @@ public class ToastUtils {
     }
 
     public static void onErrorShowToast(String message) {
-        showToast(message, R.mipmap.toast_error,
+        showToast(message, R.mipmap.ab_toast_error,
                 ContextCompat.getColor(mContext, R.color.toastDefaultTextColor),
                 Toast.LENGTH_SHORT, true, R.drawable.toast_error_shape);
     }
 
     public static void onErrorShowToast(int messageID) {
         String message = mContext.getResources().getString(messageID);
-        showToast(message, R.mipmap.toast_error,
+        showToast(message, R.mipmap.ab_toast_error,
                 ContextCompat.getColor(mContext, R.color.toastDefaultTextColor),
                 Toast.LENGTH_SHORT, true, R.drawable.toast_error_shape);
     }
 
     public static void onDefaultShowToast(int messageID) {
         String message = mContext.getResources().getString(messageID);
-        showToast(message, R.mipmap.toast_default,
+        showToast(message, R.mipmap.ab_toast_default,
                 ContextCompat.getColor(mContext, R.color.toastDefaultTextColor),
                 Toast.LENGTH_SHORT, true, R.drawable.toast_default_shape);
     }
 
     public static void onDefaultShowToast(String message) {
-        showToast(message, R.mipmap.toast_default,
+        showToast(message, R.mipmap.ab_toast_default,
                 ContextCompat.getColor(mContext, R.color.toastDefaultTextColor),
                 Toast.LENGTH_SHORT, true, R.drawable.toast_default_shape);
     }
@@ -159,13 +159,13 @@ public class ToastUtils {
 
     public static void onWarnShowToast(int messageID) {
         String message = mContext.getResources().getString(messageID);
-        showToast(message, R.mipmap.toast_warn,
+        showToast(message, R.mipmap.ab_toast_warn,
                 ContextCompat.getColor(mContext, R.color.toastDefaultTextColor),
                 Toast.LENGTH_SHORT, true, R.drawable.toast_warn_shape);
     }
 
     public static void onWarnShowToast(String message) {
-        showToast(message, R.mipmap.toast_warn,
+        showToast(message, R.mipmap.ab_toast_warn,
                 ContextCompat.getColor(mContext, R.color.toastDefaultTextColor),
                 Toast.LENGTH_SHORT, true, R.drawable.toast_warn_shape);
     }
@@ -185,13 +185,13 @@ public class ToastUtils {
 
     public static void onInfoShowToast(int messageID) {
         String message = mContext.getResources().getString(messageID);
-        showToast(message, R.mipmap.toast_info,
+        showToast(message, R.mipmap.ab_toast_info,
                 ContextCompat.getColor(mContext, R.color.toastDefaultTextColor),
                 Toast.LENGTH_SHORT, true, R.drawable.toast_info_shape);
     }
 
     public static void onInfoShowToast(String message) {
-        showToast(message, R.mipmap.toast_info,
+        showToast(message, R.mipmap.ab_toast_info,
                 ContextCompat.getColor(mContext, R.color.toastDefaultTextColor),
                 Toast.LENGTH_SHORT, true, R.drawable.toast_info_shape);
     }
@@ -261,7 +261,7 @@ public class ToastUtils {
         }
 
         @SuppressLint("InflateParams")
-        View view = LayoutInflater.from(mContext).inflate(R.layout.toast_layout, null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.ab_toast_layout, null);
         RelativeLayout toast_container = view.findViewById(R.id.toast_container);
         ImageView toast_icon = view.findViewById(R.id.toast_icon);
         TextView toast_message = view.findViewById(R.id.toast_message);

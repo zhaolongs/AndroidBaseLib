@@ -173,7 +173,7 @@ public class AutoScannerView extends View {
             lineRect.top = frame.top + lineOffsetCount;
             lineRect.right = frame.right;
             lineRect.bottom = frame.top + dp2px(10) + lineOffsetCount;
-            canvas.drawBitmap(((BitmapDrawable) (getResources().getDrawable(R.mipmap.scanline))).getBitmap(), null, lineRect, linePaint);
+            canvas.drawBitmap(((BitmapDrawable) (getResources().getDrawable(R.mipmap.ab_scanline))).getBitmap(), null, lineRect, linePaint);
         }
         postInvalidateDelayed(10L, frame.left, frame.top, frame.right, frame.bottom);
     }

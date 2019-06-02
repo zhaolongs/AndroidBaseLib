@@ -15,7 +15,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_centerVertical="true"
-        android:src="@mipmap/toast_error" />
+        android:src="@mipmap/ab_toast_error" />
 
     <TextView
         android:id="@+id/toast_message"

@@ -32,7 +32,7 @@ public class LoadingDialog extends Dialog {
             LayoutInflater inflater =
                     (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             //加载布局文件
-            mLayout = inflater.inflate(R.layout.progress_dialog_layout, null, false);
+            mLayout = inflater.inflate(R.layout.ab_progress_dialog_layout, null, false);
             //添加布局文件到 Dialog
             mDialog.addContentView(mLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));

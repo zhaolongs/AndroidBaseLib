@@ -163,7 +163,7 @@ public abstract class CommonBaseFragment extends Fragment implements IBaseInterf
 
     protected void setImageFromNet(int viewId, String imageUrl) {
         ImageView imageView = findView(viewId);
-        CommonGlideUtils.showImageView(mContext, R.mipmap.toast_error, imageUrl, imageView);
+        CommonGlideUtils.showImageView(mContext, R.mipmap.ab_toast_error, imageUrl, imageView);
     }
 
     protected void setText(int viewId, String text) {

@@ -1,6 +1,7 @@
 package com.base.baselibapplication.test.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -74,7 +75,7 @@ public class TestStagPicPageListActivity extends CommonBaseActivity {
 
 
         List<TestVideoListBean> lTestVideoListBeans = new ArrayList<>();
-        for (int lI = 0; lI < 2; lI++) {
+        for (int lI = 0; lI < 20; lI++) {
             TestVideoListBean lTestVideoListBean = new TestVideoListBean();
             lTestVideoListBean.title = System.currentTimeMillis() + " 初始化数据";
             lTestVideoListBeans.add(lTestVideoListBean);
@@ -114,7 +115,7 @@ public class TestStagPicPageListActivity extends CommonBaseActivity {
             public void onLoadMore() {
                 //上拉加载更多
                 List<TestVideoListBean> moreList = new ArrayList<>();
-                for (int lI = 0; lI < 2; lI++) {
+                for (int lI = 0; lI < 12; lI++) {
                     TestVideoListBean lTestVideoListBean = new TestVideoListBean();
                     lTestVideoListBean.title = System.currentTimeMillis() + " 上拉加载更多 ";
                     moreList.add(lTestVideoListBean);
@@ -127,6 +128,7 @@ public class TestStagPicPageListActivity extends CommonBaseActivity {
          * 初始化 videoPlayView 传入数据适配 Adapter Adapter需要继承于BaseRecyclerViewAdapter
          */
         videoPlayView.initPlayListView(mLittleVideoListAdapter,2,0,null,true,false);
+        videoPlayView.setRefreshColorSchemeColors(Color.RED);
     }
 
     @Override

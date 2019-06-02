@@ -71,7 +71,7 @@ public class CommonLoadingUtils {
             return;
         }
         // 获取自定义布局文件activity_popupwindow_left.xml的视图
-        View popupWindow_view = View.inflate(view.getContext(), R.layout.pop_progress_loading, null);
+        View popupWindow_view = View.inflate(view.getContext(), R.layout.ab_pop_progress_loading, null);
 
         // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
         mPopupWindow = new PopupWindow(popupWindow_view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);

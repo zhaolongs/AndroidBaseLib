@@ -7,15 +7,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.baselibapplication.R;
-import com.base.baselibapplication.test.adapter.PicPageScanAdapter;
 import com.base.baselibapplication.test.bean.TestMvpBean;
-import com.base.baselibapplication.test.bean.TestVideoListBean;
 import com.base.scanlistlibrary.base.ScanContact;
 import com.base.scanlistlibrary.base.ScanRecyclerViewHolder;
 import com.base.scanlistlibrary.presenter.ScanPresenter;
-import com.base.scanlistlibrary.scanlist.ScanVideoPlayView;
 import com.studyyoun.androidbaselibrary.activity.CommonBaseActivity;
-import com.studyyoun.androidbaselibrary.model.RequestModel;
 import com.studyyoun.androidbaselibrary.utils.CommonViewOnClickLiserner;
 
 import java.util.ArrayList;

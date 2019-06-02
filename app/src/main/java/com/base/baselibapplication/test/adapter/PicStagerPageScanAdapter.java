@@ -30,7 +30,7 @@ public class PicStagerPageScanAdapter extends ScanBaseRecyclerViewAdapter<TestVi
     protected void onBindData(ScanRecyclerViewHolder holder, TestVideoListBean bean, int position) {
         ImageView lView = (ImageView) holder.getView(R.id.test_video_list_iv_page);
         String url = "http://b-ssl.duitang.com/uploads/blog/201409/11/20140911024410_nX8Gs.jpeg";
-        CommonGlideUtils.showImageView(mContext,R.mipmap.toast_error,url,lView);
+        CommonGlideUtils.showImageView(mContext,R.mipmap.ab_toast_error,url,lView);
 
         TextView lTextView = (TextView) holder.getView(R.id.test_video_list_tv_page);
         lTextView.setText(""+bean.title);

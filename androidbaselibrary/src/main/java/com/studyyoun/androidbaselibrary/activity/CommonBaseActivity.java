@@ -146,13 +146,13 @@ public abstract class CommonBaseActivity extends AppCompatActivity implements IB
     @Override
     public void skipActivityByFinish(Class<? extends IBaseInterface> view) {
         skipActivity(view);
-        ViewManager.getInstance().finishView();
+        ActivityManager.getInstance().finishView();
     }
 
     @Override
     public void skipActivityByFinish(Class<? extends IBaseInterface> view, Bundle bundle) {
         skipActivity(view, bundle);
-        ViewManager.getInstance().finishView();
+        ActivityManager.getInstance().finishView();
     }
 
     @Override

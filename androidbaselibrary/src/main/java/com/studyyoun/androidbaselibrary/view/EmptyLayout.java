@@ -44,7 +44,7 @@ public class EmptyLayout extends LinearLayout implements
     }
 
     private void init() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_error_layout, this, false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.ab_view_error_layout, this, false);
         img = view.findViewById(R.id.img_error_layout);
         tv = view.findViewById(R.id.tv_error_layout);
         mLoading = view.findViewById(R.id.animProgress);

@@ -33,7 +33,7 @@ public class CropActivity extends CommonBaseActivity implements View.OnClickList
 
     @Override
     protected int getCommonLayoutId() {
-        return R.layout.activity_crop;
+        return R.layout.ab_activity_crop;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class CropActivity extends CommonBaseActivity implements View.OnClickList
     @Override
     protected void commonDelayFunction() {
 
-        CommonGlideUtils.showImageView(mContext, R.mipmap.toast_default, mUrl, mCropLayout.getImageView());
+        CommonGlideUtils.showImageView(mContext, R.mipmap.ab_toast_default, mUrl, mCropLayout.getImageView());
         mCropLayout.start();
     }
 }

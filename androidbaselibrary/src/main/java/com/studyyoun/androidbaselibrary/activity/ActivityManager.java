@@ -9,14 +9,14 @@ import com.studyyoun.androidbaselibrary.utils.ObjectUtil;
 import java.util.List;
 import java.util.Stack;
 
-public class ViewManager {
+public class ActivityManager {
 	private static Stack<IBaseInterface> activityStack = new Stack<IBaseInterface>();
 
 	private static Context context;
 	private static Application application;
 
 
-	private ViewManager() {
+	private ActivityManager() {
 	}
 
 	/**
@@ -25,8 +25,8 @@ public class ViewManager {
 	 * @param app 上下文
 	 */
 	public static void init(Application app) {
-		ViewManager.context = app.getApplicationContext();
-		ViewManager.application = app;
+		ActivityManager.context = app.getApplicationContext();
+		ActivityManager.application = app;
 	}
 
 	/**
@@ -51,10 +51,10 @@ public class ViewManager {
 
 
 	private static class ManagerHolder {
-		private static final ViewManager instance = new ViewManager();
+		private static final ActivityManager instance = new ActivityManager();
 	}
 
-	public static ViewManager getInstance() {
+	public static ActivityManager getInstance() {
 		return ManagerHolder.instance;
 	}
 
