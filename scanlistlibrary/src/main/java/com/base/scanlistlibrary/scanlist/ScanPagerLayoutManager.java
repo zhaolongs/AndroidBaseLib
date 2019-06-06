@@ -6,6 +6,8 @@ import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.base.scanlistlibrary.base.ScanContact;
+
 /**
  * ViewPager效果的LayoutManager
  *
@@ -14,7 +16,7 @@ import android.view.View;
 public class ScanPagerLayoutManager extends LinearLayoutManager {
 
     private PagerSnapHelper mPagerSnapHelper;
-    private OnViewPagerListener mOnViewPagerListener;
+    private ScanContact.OnViewPagerListener mOnViewPagerListener;
 
     /**
      * 移动方向
@@ -34,6 +36,15 @@ public class ScanPagerLayoutManager extends LinearLayoutManager {
     }
 
     @Override
+    public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        try {
+            super.onLayoutChildren(recycler, state);
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void onAttachedToWindow(RecyclerView recyclerView) {
         super.onAttachedToWindow(recyclerView);
         if (mPagerSnapHelper != null) {
@@ -50,6 +61,7 @@ public class ScanPagerLayoutManager extends LinearLayoutManager {
      */
     @Override
     public void onScrollStateChanged(int state) {
+
         switch (state) {
             case RecyclerView.SCROLL_STATE_IDLE:
 
@@ -65,7 +77,7 @@ public class ScanPagerLayoutManager extends LinearLayoutManager {
                         mOnViewPagerListener.onPageSelected(positionIdle, positionIdle == getItemCount() - 1);
                     }
                 } else {
-                    if (mOnViewPagerListener != null && findLastVisibleItemPosition() >= getItemCount() - 2) {
+                    if (mOnViewPagerListener != null) {
                         mOnViewPagerListener.onPageSelected(positionIdle, positionIdle == getItemCount() - 1);
                     }
                 }
@@ -109,7 +121,7 @@ public class ScanPagerLayoutManager extends LinearLayoutManager {
      *
      * @param listener
      */
-    public void setOnViewPagerListener(OnViewPagerListener listener) {
+    public void setOnViewPagerListener(ScanContact.OnViewPagerListener listener) {
         this.mOnViewPagerListener = listener;
     }
 
@@ -137,26 +149,8 @@ public class ScanPagerLayoutManager extends LinearLayoutManager {
         }
     };
 
-    public interface OnViewPagerListener {
-        /**
-         * 初始化完成
-         */
-        void onInitComplete();
+    public void updatAllDataAndNoSelect(boolean b) {
 
-        /**
-         * 页面不可见, 释放
-         *
-         * @param isNext   是否有下一个
-         * @param position 下标
-         */
-        void onPageRelease(boolean isNext, int position);
-
-        /**
-         * 选中的index
-         *
-         * @param position 下标
-         * @param b        是否到底部
-         */
-        void onPageSelected(int position, boolean b);
     }
+
 }

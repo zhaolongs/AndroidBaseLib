@@ -23,28 +23,25 @@ public class ScanPresenter<T> {
     private ScanVideoPlayView mScanVideoPlayView;
     private OnBindDataCallback mOnBindDataCallback;
     private int mCurrentPage = 1;
-    private String mUrlString;
     private int mCurrentPageSize = 50;
     private ScanContact.ScanModel mScanModel;
-    private HashMap<String, Object> mKeyParameter;
     private boolean mIsLoading;
-    private Class tClass;
     private int mStartIndex;
 
     public void loading(Context context, ViewGroup viewGroup, int itemLayoutId, String url, Class<?> clas, OnBindDataCallback bindDataCallback) {
-        loading(context, viewGroup, null, itemLayoutId, mCurrentPage, mCurrentPageSize, 0, url, null, clas, false, bindDataCallback);
+        loading(context, viewGroup, null, itemLayoutId, mCurrentPage, mCurrentPageSize, 0, false, bindDataCallback);
     }
 
     public void loading(Context context, ViewGroup viewGroup, int itemLayoutId, String url, HashMap<String, Object> keyParameter, Class<?> clas, OnBindDataCallback bindDataCallback) {
-        loading(context, viewGroup, null, itemLayoutId, mCurrentPage, mCurrentPageSize, 0, url, keyParameter, clas, false, bindDataCallback);
+        loading(context, viewGroup, null, itemLayoutId, mCurrentPage, mCurrentPageSize, 0,  false, bindDataCallback);
     }
 
     public void loading(Context context, ViewGroup viewGroup, View emptyView, int itemLayoutId, String url, HashMap<String, Object> keyParameter, Class<?> clas, OnBindDataCallback bindDataCallback) {
-        loading(context, viewGroup, emptyView, itemLayoutId, mCurrentPage, mCurrentPageSize, 0, url, keyParameter, clas, false, bindDataCallback);
+        loading(context, viewGroup, emptyView, itemLayoutId, mCurrentPage, mCurrentPageSize, 0,false, bindDataCallback);
     }
 
     public void loading(Context context, ViewGroup viewGroup, View emptyView, int itemLayoutId, String url, HashMap<String, Object> keyParameter, Class<?> clas, boolean isPaging, OnBindDataCallback bindDataCallback) {
-        loading(context, viewGroup, emptyView, itemLayoutId, mCurrentPage, mCurrentPageSize, 0, url, keyParameter, clas, isPaging, bindDataCallback);
+        loading(context, viewGroup, emptyView, itemLayoutId, mCurrentPage, mCurrentPageSize, 0, isPaging, bindDataCallback);
     }
 
     /**
@@ -55,12 +52,10 @@ public class ScanPresenter<T> {
      * @param currentPage      分页加载 当前页数
      * @param currentPageSize  分页加载 每页加载的数量
      * @param startIndex       列表默认滑动到的位置
-     * @param url              加载数据的URL
      * @param isPaging         是否启用单屏切换功能
-     * @param keyParameter     请求参数
      * @param bindDataCallback 设置数据的回调
      */
-    public void loading(Context context, ViewGroup viewGroup, View emptyView, int itemLayoutId, int currentPage, int currentPageSize, int startIndex, String url, HashMap<String, Object> keyParameter, Class<?> clas, boolean isPaging, OnBindDataCallback bindDataCallback) {
+    public void loading(Context context, ViewGroup viewGroup, View emptyView, int itemLayoutId, int currentPage, int currentPageSize, int startIndex, boolean isPaging, OnBindDataCallback bindDataCallback) {
 
 
         if (context == null) {
@@ -69,20 +64,13 @@ public class ScanPresenter<T> {
             throw new RuntimeException(" parent viewGroup is null ");
         } else if (itemLayoutId <= 0) {
             throw new RuntimeException(" itemLayoutId is <0 ");
-        } else if (url == null) {
-            throw new RuntimeException(" url is null");
-        } else if (clas == null) {
-            throw new RuntimeException("映射 class is null");
         } else if (bindDataCallback == null) {
             throw new RuntimeException(" bindDataCallback is null");
         }
         this.mStartIndex = startIndex;
         this.mContext = context;
-        this.mUrlString = url;
         this.mCurrentPage = currentPage;
         this.mCurrentPageSize = currentPageSize;
-        this.mKeyParameter = keyParameter;
-        this.tClass = clas;
         this.mOnBindDataCallback = bindDataCallback;
         View lView = View.inflate(context, R.layout.zl_scan_presenter_list, null);
         mScanVideoPlayView = lView.findViewById(R.id.svpv_list);
@@ -96,7 +84,7 @@ public class ScanPresenter<T> {
         List<T> refreshList = new ArrayList<>();
         PicPageScanAdapter lPicPageScanAdapter = new PicPageScanAdapter(context, refreshList, itemLayoutId, bindDataCallback);
         mScanVideoPlayView.initPlayListView(lPicPageScanAdapter, 0, isPaging);
-        mScanVideoPlayView.startLoading();
+        mScanVideoPlayView.startLoading(true);
         loadDataFunction();
 
     }
@@ -173,8 +161,8 @@ public class ScanPresenter<T> {
         try {
             if (!mIsLoading) {
                 mIsLoading = true;
-                if (mScanModel != null && mUrlString != null && !mUrlString.equals("") && mOnInterNetRequestCallback != null) {
-                    mScanModel.load(mUrlString, mCurrentPage, mCurrentPageSize, mKeyParameter, tClass, mOnInterNetRequestCallback);
+                if (mScanModel != null  && mOnInterNetRequestCallback != null) {
+                    mScanModel.load(mCurrentPage, mCurrentPageSize,mOnInterNetRequestCallback);
                 } else {
                     mIsLoading = false;
                     Log.e(LOGTAG, " model is null");

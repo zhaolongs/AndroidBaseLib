@@ -3,71 +3,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eee"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/camer_tv"
+    <com.studyyoun.androidbaselibrary.view.DropDownSpringbackScrollView
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:gravity="center"
-        android:text="自定义相机 " />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_auto_scaner"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:gravity="center"
-        android:text="仿微信扫描view " />
-    <TextView
-        android:id="@+id/tv_video_page"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:gravity="center"
-        android:text="仿抖音上下切换播放视频页面效果 " />
-    <TextView
-        android:id="@+id/tv_pic_page"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:gravity="center"
-        android:text="仿抖音上下切换页面效果 " />
-    <TextView
-        android:id="@+id/tv_data_page"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:gravity="center"
-        android:text="RecyclerView 数据加载封装 " />
-    <TextView
-        android:id="@+id/tv_data_gird_page"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:gravity="center"
-        android:text="RecyclerView 九宫格 封装 " />
-    <TextView
-        android:id="@+id/tv_data_stage_page"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:gravity="center"
-        android:text="RecyclerView 瀑布流 封装 " />
-    <TextView
-        android:id="@+id/tv_data2_page"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:gravity="center"
-        android:text="RecyclerView 数据加载高度封装 " />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/camer_tv"
+                style="@style/main_text_style"
+                android:text="自定义相机 " />
+
+            <TextView
+                android:id="@+id/tv_auto_scaner"
+                style="@style/main_text_style"
+                android:text="仿微信扫描view " />
+
+            <TextView
+                android:id="@+id/tv_video_page"
+                style="@style/main_text_style"
+                android:text="仿抖音上下切换播放视频页面效果 " />
+
+            <TextView
+                android:id="@+id/tv_pic_page"
+                style="@style/main_text_style"
+                android:text="仿抖音上下切换页面效果 " />
+
+            <TextView
+                android:id="@+id/tv_data_page"
+                style="@style/main_text_style"
+                android:text="RecyclerView 数据加载封装 " />
+
+            <TextView
+                android:id="@+id/tv_data_gird_page"
+                style="@style/main_text_style"
+                android:text="RecyclerView 九宫格 封装 " />
+
+            <TextView
+                android:id="@+id/tv_data_stage_page"
+                style="@style/main_text_style"
+                android:text="RecyclerView 瀑布流 封装 " />
+
+            <TextView
+                android:id="@+id/tv_data2_page"
+                style="@style/main_text_style"
+                android:text="RecyclerView 数据加载高度封装 " />
 
 
-    <TextView
-        android:id="@+id/tv_video_play"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:gravity="center"
-        android:text="视频播放相关" />
-    <TextView
-        android:id="@+id/tv_video_zxing"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:gravity="center"
-        android:text="扫一扫功能" />
+            <TextView
+                android:id="@+id/tv_video_play"
+                style="@style/main_text_style"
+                android:text="视频播放相关" />
 
+            <TextView
+                android:id="@+id/tv_video_zxing"
+                style="@style/main_text_style"
+                android:text="扫一扫功能" />
+            <TextView
+                android:id="@+id/tv_img_show"
+                style="@style/main_text_style"
+                android:text="测试加载图片" />
+
+        </LinearLayout>
+    </com.studyyoun.androidbaselibrary.view.DropDownSpringbackScrollView>
 </LinearLayout>

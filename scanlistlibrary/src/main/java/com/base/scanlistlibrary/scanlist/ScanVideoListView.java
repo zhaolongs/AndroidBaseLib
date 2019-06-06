@@ -5,9 +5,11 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -31,7 +33,7 @@ public class ScanVideoListView<A> extends FrameLayout {
     private ScanRecyclerView mScanRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ScanBaseRecyclerViewAdapter<A> mRecyclerViewAdapter;
-    private ScanPagerLayoutManager mScanPagerLayoutManager;
+
     private View mEmptyView;
 
 
@@ -42,7 +44,9 @@ public class ScanVideoListView<A> extends FrameLayout {
 
     //刷新数据listener
     private ScanContact.OnRefreshDataListener onRefreshDataListener;
+    //页面选择回调
     private ScanContact.OnPageSelectListener mOnPageSelectListener;
+    private ScanContact.OnPageSelectScrollListener mOnPageSelectScrollListener;
     private RecyclerView.RecyclerListener mRecyclerListener;
     /**
      * 判断是否处于加载数据的状态中
@@ -64,20 +68,24 @@ public class ScanVideoListView<A> extends FrameLayout {
      * 正常滑动，上一个被暂停的位置
      */
     private int mLastStopPosition = -1;
+    private ScanPagerLayoutManager mScanPagerLayoutManager;
+    private GridPagerLayoutManager mGridPagerLayoutManager;
+    private StagerPagerLayoutManager mStagerPagerLayoutManager;
 
 
-    public ScanVideoListView(@NonNull Context context, int emptyLayoutId, boolean isPaging) {
+    public ScanVideoListView(@NonNull Context context, int column, int emptyLayoutId, String emptyMsg, boolean isStager, boolean isPaging) {
         super(context);
         this.mContext = context;
-        init(isPaging, emptyLayoutId);
+        init(isPaging, isStager, column, emptyLayoutId, emptyMsg);
     }
 
 
-    private void init(boolean isPaging, int emptyLayoutId) {
+    private void init(boolean isPaging, boolean isStager, int column, int emptyLayoutId, String emptyMsg) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.zl_page_list_main_layout, this, true);
         mScanRecyclerView = view.findViewById(R.id.zl_page_list_main_recycler);
+        mScanRecyclerView.setEmptyViewMsg(emptyMsg);
         mSwipeRefreshLayout = view.findViewById(R.id.zl_page_list_main_refresh_view);
-        mSwipeRefreshLayout.setColorSchemeColors(Color.YELLOW, Color.GREEN, Color.BLUE, Color.RED);
+        mSwipeRefreshLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -91,9 +99,30 @@ public class ScanVideoListView<A> extends FrameLayout {
             mScanRecyclerView.setRecyclerListener(this.mRecyclerListener);
         }
         mScanRecyclerView.setHasFixedSize(true);
-        mScanPagerLayoutManager = new ScanPagerLayoutManager(mContext, isPaging);
-        mScanPagerLayoutManager.setItemPrefetchEnabled(true);
-        mScanRecyclerView.setLayoutManager(mScanPagerLayoutManager);
+        //禁用默认加载动画
+        ((SimpleItemAnimator) mScanRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+        if (isStager) {
+            mStagerPagerLayoutManager = new StagerPagerLayoutManager(mContext, column, false);
+            mStagerPagerLayoutManager.setItemPrefetchEnabled(true);
+            mStagerPagerLayoutManager.setOnViewPagerListener(mGridOnViewPagerListener);
+            mScanRecyclerView.setLayoutManager(mStagerPagerLayoutManager);
+        } else {
+            if (column == 1) {
+                mScanPagerLayoutManager = new ScanPagerLayoutManager(mContext, isPaging);
+                mScanPagerLayoutManager.setItemPrefetchEnabled(true);
+                mScanPagerLayoutManager.setOnViewPagerListener(mGridOnViewPagerListener);
+                mScanRecyclerView.setLayoutManager(mScanPagerLayoutManager);
+
+            } else {
+                mGridPagerLayoutManager = new GridPagerLayoutManager(mContext, column, isPaging);
+                mGridPagerLayoutManager.setItemPrefetchEnabled(true);
+                mGridPagerLayoutManager.setOnViewPagerListener(mGridOnViewPagerListener);
+                mScanRecyclerView.setLayoutManager(mGridPagerLayoutManager);
+            }
+        }
+
+        mScanRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(mOnGlobalLayoutListener);
+
         if (emptyLayoutId <= 0) {
             View emptyView = view.findViewById(R.id.zl_page_list_main_empty_view);
             mEmptyView = emptyView;
@@ -108,66 +137,92 @@ public class ScanVideoListView<A> extends FrameLayout {
         }
 
         mEmptyView.setOnClickListener(mOnRefreshClickListener);
-        mScanPagerLayoutManager.setOnViewPagerListener(new ScanPagerLayoutManager.OnViewPagerListener() {
-            @Override
-            public void onInitComplete() {
-                int position = mScanPagerLayoutManager.findFirstVisibleItemPosition();
-                Log.e(TAG, "onInitComplete mCurrentPosition= " + mCurrentPosition + "  position " + position);
-                if (position != -1) {
-                    mCurrentPosition = position;
-                }
-                startPlay(mCurrentPosition);
-                mLastStopPosition = -1;
-                Log.e(TAG, "onInitComplete mCurrentPosition= " + mCurrentPosition);
 
-
-            }
-
-            @Override
-            public void onPageRelease(boolean isNext, int position) {
-                if (mCurrentPosition == position) {
-                    mLastStopPosition = position;
-                    stopPlay(position);
-                }
-
-            }
-
-            @Override
-            public void onPageSelected(int position, boolean b) {
-                //重新选中视频不播放，如果该位置被stop过则会重新播放视频
-                if (mCurrentPosition == position && mLastStopPosition != position) {
-                    return;
-                }
-                mCurrentPosition = position;
-                int itemCount = mRecyclerViewAdapter.getItemCount();
-                if (itemCount - position < DEFAULT_PRELOAD_NUMBER && !isLoadingData && !isEnd) {
-                    // 正在加载中, 防止网络太慢或其他情况造成重复请求列表
-                    isLoadingData = true;
-                    loadMore();
-                }
-                //开始播放选中视频
-                startPlay(position);
-
-            }
-        });
 
     }
 
+    private int mPreFirstVisibleItemPosition = -1;
+    private ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+        @Override
+        public void onGlobalLayout() {
+            int lFirstVisibleItemPosition = 0;
+            int lFirstCompletelyVisibleItemPosition = 0;
+            if (mScanPagerLayoutManager != null) {
+                lFirstVisibleItemPosition = mScanPagerLayoutManager.findFirstVisibleItemPosition();
+                lFirstCompletelyVisibleItemPosition = mScanPagerLayoutManager.findFirstCompletelyVisibleItemPosition();
+            } else if (mGridPagerLayoutManager != null) {
+                lFirstVisibleItemPosition = mGridPagerLayoutManager.findFirstVisibleItemPosition();
+                lFirstCompletelyVisibleItemPosition = mGridPagerLayoutManager.findFirstCompletelyVisibleItemPosition();
+            }
+
+            if (lFirstVisibleItemPosition == 0 && mPreFirstVisibleItemPosition == -1) {
+                mPreFirstVisibleItemPosition = 0;
+                startPlay(lFirstVisibleItemPosition);
+            }
+
+            Log.d(TAG, "onGlobalLayout ");
+        }
+    };
+    ScanContact.OnViewPagerListener mGridOnViewPagerListener = new ScanContact.OnViewPagerListener() {
+        @Override
+        public void onInitComplete() {
+            Log.e(TAG, "onInitComplete mCurrentPosition= " + mCurrentPosition);
+
+        }
+
+        @Override
+        public void onPageRelease(boolean isNext, int position) {
+            if (mCurrentPosition == position) {
+                mLastStopPosition = position;
+                stopPlay(position);
+            }
+
+        }
+
+        @Override
+        public void onPageSelected(int position, boolean b) {
+            mCurrentPosition = position;
+            int lLastVisibleItemPosition =0;
+            if (mGridPagerLayoutManager != null) {
+                lLastVisibleItemPosition = mGridPagerLayoutManager.findLastVisibleItemPosition();
+            }else if (mScanPagerLayoutManager!=null){
+                lLastVisibleItemPosition = mScanPagerLayoutManager.findLastVisibleItemPosition();
+            }else if (mStagerPagerLayoutManager!=null){
+                lLastVisibleItemPosition = mStagerPagerLayoutManager.findLastVisibleItemPosition();
+            }
+
+            int itemCount = mRecyclerViewAdapter.getItemCount();
+            if (lLastVisibleItemPosition == itemCount - 1 && !isLoadingData && !isEnd) {
+                // 正在加载中, 防止网络太慢或其他情况造成重复请求列表
+                isLoadingData = true;
+                loadMore();
+            }
+            startPlay(position);
+        }
+    };
+
+
     private void stopPlay(int position) {
-        if (position < 0 || position > list.size()) {
+        if (position < 0 || position >= list.size()) {
             return;
         }
         if (mOnPageSelectListener != null) {
             mOnPageSelectListener.onPageRelease(position, list.get(position), mRecyclerViewAdapter, (ScanRecyclerViewHolder) mScanRecyclerView.findViewHolderForAdapterPosition(position));
         }
+        if (mOnPageSelectScrollListener != null) {
+            mOnPageSelectScrollListener.onPageRelease(position, list.get(position), mRecyclerViewAdapter, (ScanRecyclerViewHolder) mScanRecyclerView.findViewHolderForAdapterPosition(position));
+        }
     }
 
-    private void startPlay(int position) {
-        if (position < 0 || position > list.size()) {
+    private void startPlay(int firstPosition) {
+        if (firstPosition < 0 || firstPosition >=list.size()) {
             return;
         }
         if (mOnPageSelectListener != null) {
-            mOnPageSelectListener.onPageSelected(position, list.get(position), mRecyclerViewAdapter, (ScanRecyclerViewHolder) mScanRecyclerView.findViewHolderForAdapterPosition(position));
+            mOnPageSelectListener.onPageSelected(firstPosition, list.get(firstPosition), mRecyclerViewAdapter, (ScanRecyclerViewHolder) mScanRecyclerView.findViewHolderForAdapterPosition(firstPosition));
+        }
+        if (mOnPageSelectScrollListener != null) {
+            mOnPageSelectScrollListener.onPageSelected(list, mRecyclerViewAdapter, mScanRecyclerView);
         }
     }
 
@@ -190,6 +245,7 @@ public class ScanVideoListView<A> extends FrameLayout {
      * @param list 刷新数据
      */
     public void refreshData(List<A> list) {
+        mScanRecyclerView.setLoadingStatus(1);
         if (mSwipeRefreshLayout != null && mSwipeRefreshLayout.isRefreshing()) {
             mSwipeRefreshLayout.setRefreshing(false);
             // 加载完毕, 重置加载状态
@@ -206,6 +262,7 @@ public class ScanVideoListView<A> extends FrameLayout {
      * @param position 刷新完成之后播放位置
      */
     public void refreshData(List<A> list, int position) {
+        mScanRecyclerView.setLoadingStatus(1);
         int size = list.size();
         if (position < 0) {
             position = 0;
@@ -228,6 +285,7 @@ public class ScanVideoListView<A> extends FrameLayout {
      * @param list
      */
     public void addMoreData(List<A> list) {
+        mScanRecyclerView.setLoadingStatus(1);
         isLoadingData = false;
         if (mRecyclerViewAdapter != null) {
             mRecyclerViewAdapter.addMoreData(list);
@@ -235,7 +293,6 @@ public class ScanVideoListView<A> extends FrameLayout {
         if (mSwipeRefreshLayout.isRefreshing()) {
             mSwipeRefreshLayout.setRefreshing(false);
         }
-
     }
 
     public void setOnRefreshDataListener(ScanContact.OnRefreshDataListener onRefreshDataListener) {
@@ -244,6 +301,10 @@ public class ScanVideoListView<A> extends FrameLayout {
 
     public void setOnPageSelectListener(ScanContact.OnPageSelectListener onPageSelectListener) {
         mOnPageSelectListener = onPageSelectListener;
+    }
+
+    public void setOnPageSelectScrollListener(ScanContact.OnPageSelectScrollListener onPageSelectScrollListener) {
+        mOnPageSelectScrollListener = onPageSelectScrollListener;
     }
 
     public void setOnRecyclerListener(RecyclerView.RecyclerListener recyclerListener) {
@@ -282,7 +343,7 @@ public class ScanVideoListView<A> extends FrameLayout {
         this.list = recyclerViewAdapter.getData();
     }
 
-    public void setRefreshColorSchemeColors(int colors) {
+    public void setRefreshColorSchemeColors(int ... colors) {
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeColors(colors);
         }
@@ -296,7 +357,7 @@ public class ScanVideoListView<A> extends FrameLayout {
             if (mSwipeRefreshLayout != null) {
                 if (!mSwipeRefreshLayout.isRefreshing()) {
                     if (onRefreshDataListener != null) {
-                        startLoading();
+                        startLoading(false);
                         onRefreshDataListener.onRefresh();
                     }
                 }
@@ -304,15 +365,21 @@ public class ScanVideoListView<A> extends FrameLayout {
         }
     };
 
-    public void startLoading() {
-        if (mSwipeRefreshLayout != null) {
+    public void startLoading(boolean flag) {
+        if (mSwipeRefreshLayout != null && flag) {
             mSwipeRefreshLayout.setRefreshing(true);
         }
-        if (mEmptyView != null) {
-            TextView emptyTextView = mEmptyView.findViewById(R.id.zl_page_tv_main_empty_view);
-            if (emptyTextView != null) {
-                emptyTextView.setText("加载中...");
-            }
+        mScanRecyclerView.setLoadingStatus(0);
+    }
+
+    public void updatAllDataAndNoSelect(int pos) {
+        mScanPagerLayoutManager.updatAllDataAndNoSelect(false);
+    }
+
+    public void setOnRefresh(boolean b) {
+        if (mSwipeRefreshLayout != null){
+            mSwipeRefreshLayout.setEnabled(b);
         }
+
     }
 }

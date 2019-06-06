@@ -68,6 +68,7 @@
         <activity android:name=".test.activity.TestRecyclerViewMvpActivity" />
         <activity android:name=".test.activity.TestGirdPicPageListActivity" />
         <activity android:name=".test.activity.TestStagPicPageListActivity" />
+        <activity android:name=".test.activity.TestGlideLoadingImageActivity" />
     </application>
 
 </manifest>

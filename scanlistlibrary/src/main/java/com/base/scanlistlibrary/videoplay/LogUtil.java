@@ -3,7 +3,7 @@ package com.base.scanlistlibrary.videoplay;
 import android.util.Log;
 
 /**
- * Created by XiaoJianjun on 2017/5/4.
+ * Created by zhaolong on 2017/5/4.
  * log工具.
  */
 public class LogUtil {

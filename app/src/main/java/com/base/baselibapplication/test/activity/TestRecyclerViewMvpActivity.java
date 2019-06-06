@@ -41,7 +41,7 @@ public class TestRecyclerViewMvpActivity extends CommonBaseActivity {
     @Override
     protected void commonInitView(View view) {
         mRootViewLayout = findViewById(R.id.root_view);
-        mBackImageView = findViewById(R.id.vote_video_list_back);
+        mBackImageView = findViewById(R.id.scan_video_list_back);
     }
 
     @Override
@@ -70,9 +70,6 @@ public class TestRecyclerViewMvpActivity extends CommonBaseActivity {
                 1,
                 50,
                 0,
-                "http://www.test.com",
-                null,
-                TestMvpBean.class,
                 false,
                 new ScanPresenter.OnBindDataCallback() {
                     @Override
@@ -103,7 +100,7 @@ public class TestRecyclerViewMvpActivity extends CommonBaseActivity {
     public class RequestModel implements ScanContact.ScanModel {
 
         @Override
-        public void load(String urlString, final int currentPage, int currentPageSize, HashMap<String, Object> keyParameter, Class tClass, final ScanPresenter.OnInterNetRequestCallback onInterNetRequestCallback) {
+        public void load(final int currentPage, int currentPageSize, final ScanPresenter.OnInterNetRequestCallback onInterNetRequestCallback) {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {

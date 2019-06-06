@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.baselibapplication.R;
-import com.base.baselibapplication.test.adapter.PicGirdPageScanAdapter;
 import com.base.baselibapplication.test.adapter.PicStagerPageScanAdapter;
 import com.base.baselibapplication.test.bean.TestVideoListBean;
 import com.base.scanlistlibrary.base.ScanBaseRecyclerViewAdapter;
@@ -45,8 +44,8 @@ public class TestStagPicPageListActivity extends CommonBaseActivity {
 
     @Override
     protected void commonInitView(View view) {
-        videoPlayView = findViewById(R.id.vote_video_play);
-        mBackImageView = findViewById(R.id.vote_video_list_back);
+        videoPlayView = findViewById(R.id.scan_video_play);
+        mBackImageView = findViewById(R.id.scan_video_list_back);
         mPageIndexTextView = findViewById(R.id.test_video_list_tv_page);
         mUpdateAllButon = findViewById(R.id.test_video_list_bt_update_all_page);
     }
@@ -85,8 +84,8 @@ public class TestStagPicPageListActivity extends CommonBaseActivity {
         videoPlayView.setOnPageSelectListener(new ScanContact.OnPageSelectListener() {
             @Override
             public void onPageSelected(int position, Object bean, ScanBaseRecyclerViewAdapter adapter, ScanRecyclerViewHolder holder) {
-                LogUtils.d("onPageSelected "+position+"  holder "+ holder);
-                mPageIndexTextView.setText("s "+position);
+                LogUtils.d("onPageSelected " + position + "  holder " + holder);
+                mPageIndexTextView.setText("s " + position);
             }
 
             @Override
@@ -124,10 +123,16 @@ public class TestStagPicPageListActivity extends CommonBaseActivity {
             }
         });
 
+
         /**
          * 初始化 videoPlayView 传入数据适配 Adapter Adapter需要继承于BaseRecyclerViewAdapter
+         * 参数二 colum 是瀑布流显示时所要显示的列数 这里显示2列
+         * 参数三 emptyLayoutId 是无数据时 显示的布局样式，传0 显示默认
+         * 参数四 emptyMsg 是无数据时 显示的文字提示
+         * 参数五 isStager 只有设置为true 时才会使用瀑布流样式
+         * 参数六 设置为false 只在整页切换数据时使用
          */
-        videoPlayView.initPlayListView(mLittleVideoListAdapter,2,0,null,true,false);
+        videoPlayView.initPlayListView(mLittleVideoListAdapter, 2, 0, null, true, false);
         videoPlayView.setRefreshColorSchemeColors(Color.RED);
     }
 

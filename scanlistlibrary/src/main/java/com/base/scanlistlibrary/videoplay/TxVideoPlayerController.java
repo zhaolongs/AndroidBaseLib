@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by XiaoJianjun on 2017/6/21.
+ * Created by zhaolong on 2017/6/21.
  * 仿腾讯视频热点列表页播放器控制器.
  */
 public class TxVideoPlayerController
@@ -100,6 +100,8 @@ public class TxVideoPlayerController
         mTop = (LinearLayout) findViewById(R.id.top);
         mBack = (ImageView) findViewById(R.id.back);
         mTitle = (TextView) findViewById(R.id.title);
+        mTitle.setVisibility(GONE);
+
         mBatteryTime = (LinearLayout) findViewById(R.id.battery_time);
         mBattery = (ImageView) findViewById(R.id.battery);
         mTime = (TextView) findViewById(R.id.time);

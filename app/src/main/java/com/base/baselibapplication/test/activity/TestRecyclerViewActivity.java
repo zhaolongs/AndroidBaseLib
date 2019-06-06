@@ -36,8 +36,8 @@ public class TestRecyclerViewActivity extends CommonBaseActivity {
 
     @Override
     protected void commonInitView(View view) {
-        mScanVideoPlayView = findViewById(R.id.vote_video_play);
-        mBackImageView = findViewById(R.id.vote_video_list_back);
+        mScanVideoPlayView = findViewById(R.id.scan_video_play);
+        mBackImageView = findViewById(R.id.scan_video_list_back);
     }
 
     @Override

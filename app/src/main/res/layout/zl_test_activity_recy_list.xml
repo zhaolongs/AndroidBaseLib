@@ -15,7 +15,7 @@
         android:layout_height="74dp">
 
         <ImageView
-            android:id="@+id/vote_video_list_back"
+            android:id="@+id/scan_video_list_back"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_alignParentLeft="true"

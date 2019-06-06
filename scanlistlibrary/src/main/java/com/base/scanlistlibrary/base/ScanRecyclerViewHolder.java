@@ -10,7 +10,7 @@ import android.view.View;
  * 使用 {@link #mViews} 对ItemView的子view进行存储，同时使用 {@link #getView(int)} 方法进行ItemView
  * 中的子View的获取。获取方式是：如果mViews中存在则直接使用，不存在则从ItemView中find。
  * <p>
- * Created by DavidChen on 2018/5/30.
+ * Created by zhaolong on 2018/5/30.
  */
 
 public class ScanRecyclerViewHolder extends RecyclerView.ViewHolder {

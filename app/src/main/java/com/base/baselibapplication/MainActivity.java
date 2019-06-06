@@ -1,13 +1,16 @@
 package com.base.baselibapplication;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 import com.base.baselibapplication.example.VideoMainActivity;
 import com.base.baselibapplication.test.activity.TestAutoScannerViewActivity;
 import com.base.baselibapplication.test.activity.TestGirdPicPageListActivity;
+import com.base.baselibapplication.test.activity.TestGlideLoadingImageActivity;
 import com.base.baselibapplication.test.activity.TestRecyclerViewActivity;
 import com.base.baselibapplication.test.activity.TestPicPageListActivity;
 import com.base.baselibapplication.test.activity.TestRecyclerViewMvpActivity;
@@ -15,6 +18,7 @@ import com.base.baselibapplication.test.activity.TestStagPicPageListActivity;
 import com.base.baselibapplication.test.activity.TestVideoPageListActivity;
 import com.base.baselibapplication.zxing.ZxingMainActivity;
 import com.base.cameralibrary.activity.CameraExampOpenActivity;
+import com.studyyoun.androidbaselibrary.utils.SelectorUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.camer_tv).setOnClickListener(new View.OnClickListener() {
+        TextView camerTextView =findViewById(R.id.camer_tv);
+        SelectorUtil.addSelector(this,Color.parseColor("#9955ff"),Color.parseColor("#7700ff"),camerTextView);
+        camerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity.this.startActivity(new Intent(MainActivity.this, CameraExampOpenActivity.class));
@@ -83,6 +89,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.this.startActivity(new Intent(MainActivity.this, ZxingMainActivity.class));
+            }
+        });
+
+        TextView testShowImageTextView =findViewById(R.id.tv_img_show);
+        SelectorUtil.addSelector(this,Color.parseColor("#9955ff"),Color.parseColor("#7700ff"),testShowImageTextView);
+        testShowImageTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.startActivity(new Intent(MainActivity.this, TestGlideLoadingImageActivity.class));
             }
         });
     }

@@ -13,7 +13,6 @@ import com.base.scanlistlibrary.base.ScanBaseRecyclerViewAdapter;
 import com.base.scanlistlibrary.base.ScanContact;
 import com.base.scanlistlibrary.base.ScanRecyclerViewHolder;
 import com.base.scanlistlibrary.scanlist.ScanVideoPlayView;
-import com.base.scanlistlibrary.videoplay.LogUtil;
 import com.base.scanlistlibrary.videoplay.NiceVideoPlayer;
 import com.base.scanlistlibrary.videoplay.NiceVideoPlayerManager;
 import com.studyyoun.androidbaselibrary.activity.CommonBaseActivity;
@@ -42,8 +41,8 @@ public class TestVideoPageListActivity extends CommonBaseActivity {
 
     @Override
     protected void commonInitView(View view) {
-        videoPlayView = findViewById(R.id.vote_video_play);
-        mBackImageView = findViewById(R.id.vote_video_list_back);
+        videoPlayView = findViewById(R.id.scan_video_play);
+        mBackImageView = findViewById(R.id.scan_video_list_back);
     }
 
     @Override

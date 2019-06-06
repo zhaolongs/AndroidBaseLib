@@ -4,7 +4,6 @@
     android:layout_height="80dp"
     android:orientation="vertical">
 
-
     <TextView
         android:id="@+id/test_video_list_page"
         android:layout_width="match_parent"

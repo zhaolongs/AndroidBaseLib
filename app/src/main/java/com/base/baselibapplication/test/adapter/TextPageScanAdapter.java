@@ -28,6 +28,7 @@ public class TextPageScanAdapter extends ScanBaseRecyclerViewAdapter<TestVideoLi
 
     @Override
     protected void onBindData(ScanRecyclerViewHolder holder, TestVideoListBean bean, int position) {
+        //在此方法中设置数据
         TextView lTextView = (TextView) holder.getView(R.id.test_video_list_page);
         lTextView.setText(""+bean.title);
     }

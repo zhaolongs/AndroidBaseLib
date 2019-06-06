@@ -50,21 +50,40 @@ public class ScanVideoPlayView<A> extends FrameLayout {
 
     private void init(ScanBaseRecyclerViewAdapter<A> adapter, boolean isPaging) {
         if (adapter != null) {
-            initPlayListView(adapter, 0,isPaging);
+            initPlayListView(adapter, 0, isPaging);
         }
         initLoadingView();
     }
-    public void initPlayListView(ScanBaseRecyclerViewAdapter<A> adapter, boolean isPaging) {
-        initPlayListView(adapter,0,isPaging);
+
+    public void initPlayListView(ScanBaseRecyclerViewAdapter<A> adapter) {
+        initPlayListView(adapter, false);
     }
+    public void initPlayListView(ScanBaseRecyclerViewAdapter<A> adapter, boolean isPaging) {
+        initPlayListView(adapter, 0, isPaging);
+    }
+
+    public void initPlayListView(ScanBaseRecyclerViewAdapter<A> adapter, int emptyLayoutId, boolean isPaging) {
+        initPlayListView(adapter,1,emptyLayoutId,isPaging);
+    }
+
+    public void initPlayListView(ScanBaseRecyclerViewAdapter<A> adapter, int colum, int emptyLayoutId, boolean isPaging) {
+        initPlayListView(adapter, colum, emptyLayoutId, null, isPaging);
+    }
+    public void initPlayListView(ScanBaseRecyclerViewAdapter<A> adapter, int colum, int emptyLayoutId, String emptyMsg, boolean isPaging) {
+        initPlayListView(adapter, colum, emptyLayoutId, emptyMsg, false,isPaging);
+    }
+
     /**
-     * 初始化视频列表
-     *
-     * @param adapter  数据适配器 需要继承于ScanBaseRecyclerViewAdapter
+     * 初始化数据列表View
+     * @param adapter 数据适配器 需要继承于ScanBaseRecyclerViewAdapter 并在相应构造中调用 super(context, data, layoutId); 如果是瀑布流的话需要 调用 super(context, data, layoutId, 2);
+     * @param colum   默认为1  当设置的列表数据 为瀑布流 九宫格的时候 colum起作用
+     * @param emptyLayoutId 无数据时个显示的空布局
+     * @param emptyMsg 无数据时 默认显示的文本
+     * @param isStager 启动瀑布流 功能
      * @param isPaging true 启动分页功能（也就是说recyclerview自动对齐） false 不启动分页功能
      */
-    public void initPlayListView(ScanBaseRecyclerViewAdapter<A> adapter,int emptyLayoutId, boolean isPaging) {
-        mScanVideoListView = new ScanVideoListView(mContext,emptyLayoutId, isPaging);
+    public void initPlayListView(ScanBaseRecyclerViewAdapter<A> adapter, int colum, int emptyLayoutId, String emptyMsg,boolean isStager, boolean isPaging) {
+        mScanVideoListView = new ScanVideoListView(mContext, colum, emptyLayoutId, emptyMsg,isStager, isPaging);
         //创建adapter，需要继承BaseRecyclerViewAdapter<A>
         //给AlivcVideoListView实例化对象添加adapter
         mScanVideoListView.setRecyclerViewAdapter(adapter);
@@ -79,6 +98,7 @@ public class ScanVideoPlayView<A> extends FrameLayout {
         //添加到布局中
         addSubView(mScanVideoListView);
     }
+
 
 
     private void initLoadingView() {
@@ -119,7 +139,7 @@ public class ScanVideoPlayView<A> extends FrameLayout {
     /**
      * 刷新视频列表数据
      *
-     * @param datas 列表数据
+     * @param datas    列表数据
      * @param position 初始化显示位置
      */
     public void refreshVideoList(List<A> datas, int position) {
@@ -177,7 +197,20 @@ public class ScanVideoPlayView<A> extends FrameLayout {
     }
 
 
-    public void startLoading() {
-        mScanVideoListView.startLoading();
+    public void startLoading(boolean flag) {
+        mScanVideoListView.startLoading(flag);
+    }
+    public void updatAllDataAndNoSelect(int pos){
+        mScanVideoListView.updatAllDataAndNoSelect(pos);
+    }
+    public void setRefreshColorSchemeColors(int ... colors) {
+        if (mScanVideoListView != null) {
+            mScanVideoListView.setRefreshColorSchemeColors(colors);
+        }
+    }
+    public void setOnRefresh(boolean b) {
+        if (mScanVideoListView != null) {
+            mScanVideoListView.setOnRefresh(b);
+        }
     }
 }

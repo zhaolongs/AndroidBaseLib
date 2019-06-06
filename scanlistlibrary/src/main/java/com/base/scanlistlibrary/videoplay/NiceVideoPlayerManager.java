@@ -1,7 +1,7 @@
 package com.base.scanlistlibrary.videoplay;
 
 /**
- * Created by XiaoJianjun on 2017/5/5.
+ * Created by zhaolong on 2017/5/5.
  * 视频播放器管理器.
  */
 public class NiceVideoPlayerManager {

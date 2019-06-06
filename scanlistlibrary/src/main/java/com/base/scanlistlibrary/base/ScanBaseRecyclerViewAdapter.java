@@ -19,23 +19,48 @@ public abstract class ScanBaseRecyclerViewAdapter<T> extends RecyclerView.Adapte
     private Context mContext;
     protected List<T> mData;
     private int mLayoutId;
-
+    private int mHolderType;
+    private int mItemHeight;
+    private int mItemRandom;
     private OnItemClickListener mListener;
     private Point mScreenPoint = new Point();
+
     public ScanBaseRecyclerViewAdapter(Context context, List<T> data, int layoutId) {
+        init(context, data, layoutId, 1, 200, 100);
+    }
+
+    public ScanBaseRecyclerViewAdapter(Context context, List<T> data, int layoutId, int type) {
+        init(context, data, layoutId, type, 200, 100);
+    }
+
+    public ScanBaseRecyclerViewAdapter(Context context, List<T> data, int layoutId, int type, int height, int random) {
+        init(context, data, layoutId, type, height, random);
+    }
+
+    protected void init(Context context, List<T> data, int layoutId, int type, int height, int random) {
         this.mContext = context;
         this.mData = data;
+        this.mItemHeight = height;
+        this.mItemRandom = random;
+        this.mHolderType = type;
         this.mLayoutId = layoutId;
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         mScreenPoint.x = displayMetrics.widthPixels;
         mScreenPoint.y = displayMetrics.heightPixels;
     }
 
+    ;
+
     @Override
     public ScanRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
         view.setOnClickListener(this);
-        return new ScanRecyclerViewHolder(view);
+        if (this.mHolderType == 1) {
+            return new ScanRecyclerViewHolder(view);
+        } else {
+            return new ScanRecyclerViewHolder2(view, mItemHeight, mItemRandom);
+        }
+
     }
 
     @Override

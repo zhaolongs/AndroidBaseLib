@@ -1,1 +1,1 @@
-include ':app', ':androidbaselibrary', ':multi-image-selector', ':cameralibrary', ':scanlistlibrary', ':zxinglite', ':module_http'
+include ':app', ':androidbaselibrary', ':multi-image-selector', ':cameralibrary', ':scanlistlibrary', ':zxinglite', ':module_http', ':module_share'

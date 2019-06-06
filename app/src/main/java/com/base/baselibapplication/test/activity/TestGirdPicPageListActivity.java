@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.base.baselibapplication.R;
 import com.base.baselibapplication.test.adapter.PicGirdPageScanAdapter;
-import com.base.baselibapplication.test.adapter.PicPageScanAdapter;
 import com.base.baselibapplication.test.bean.TestVideoListBean;
 import com.base.scanlistlibrary.base.ScanBaseRecyclerViewAdapter;
 import com.base.scanlistlibrary.base.ScanContact;
@@ -44,8 +43,8 @@ public class TestGirdPicPageListActivity extends CommonBaseActivity {
 
     @Override
     protected void commonInitView(View view) {
-        videoPlayView = findViewById(R.id.vote_video_play);
-        mBackImageView = findViewById(R.id.vote_video_list_back);
+        videoPlayView = findViewById(R.id.scan_video_play);
+        mBackImageView = findViewById(R.id.scan_video_list_back);
         mPageIndexTextView = findViewById(R.id.test_video_list_tv_page);
         mUpdateAllButon = findViewById(R.id.test_video_list_bt_update_all_page);
     }
@@ -125,6 +124,9 @@ public class TestGirdPicPageListActivity extends CommonBaseActivity {
 
         /**
          * 初始化 videoPlayView 传入数据适配 Adapter Adapter需要继承于BaseRecyclerViewAdapter
+         * 参数二 colum 是九宫格显示时所要显示的列数 这里显示3列
+         * 参数三 emptyLayoutId 是无数据时 显示的布局样式，传0 显示默认
+         * 参数四 设置为false 只在整页切换数据时使用
          */
         videoPlayView.initPlayListView(mLittleVideoListAdapter,3,0,false);
     }
