@@ -14,15 +14,16 @@ import java.util.List;
  * RecyclerView adapter基类
  */
 
-public abstract class ScanBaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<ScanRecyclerViewHolder> implements View.OnClickListener {
+public abstract class ScanBaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<ScanRecyclerViewHolder> implements View.OnClickListener,View.OnLongClickListener {
 
-    private Context mContext;
+    protected Context mContext;
     protected List<T> mData;
     private int mLayoutId;
     private int mHolderType;
     private int mItemHeight;
     private int mItemRandom;
-    private OnItemClickListener mListener;
+    private ScanContact.OnItemClickListener mOnItemClickListener;
+    private ScanContact.OnItemLongClickListener mOnItemLongClickListener;
     private Point mScreenPoint = new Point();
 
     public ScanBaseRecyclerViewAdapter(Context context, List<T> data, int layoutId) {
@@ -55,6 +56,7 @@ public abstract class ScanBaseRecyclerViewAdapter<T> extends RecyclerView.Adapte
     public ScanRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
         view.setOnClickListener(this);
+        view.setOnLongClickListener(this);
         if (this.mHolderType == 1) {
             return new ScanRecyclerViewHolder(view);
         } else {
@@ -77,13 +79,25 @@ public abstract class ScanBaseRecyclerViewAdapter<T> extends RecyclerView.Adapte
 
     @Override
     public void onClick(View v) {
-        if (mListener != null) {
-            mListener.onItemClick(this, v, (Integer) v.getTag());
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(this, v, (Integer) v.getTag());
         }
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.mListener = onItemClickListener;
+    @Override
+    public boolean onLongClick(View v) {
+        if (mOnItemLongClickListener != null) {
+            mOnItemLongClickListener.onItemLongClick(this,v,(Integer) v.getTag());
+        }
+        return true;
+    }
+
+    public void setOnItemClickListener(ScanContact.OnItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
+    }
+
+    public void setOnItemLongClickListener(ScanContact.OnItemLongClickListener onItemLongClickListener) {
+        mOnItemLongClickListener = onItemLongClickListener;
     }
 
     /**
@@ -95,19 +109,6 @@ public abstract class ScanBaseRecyclerViewAdapter<T> extends RecyclerView.Adapte
      */
     protected abstract void onBindData(ScanRecyclerViewHolder holder, T bean, int position);
 
-    /**
-     * item点击监听器
-     */
-    public interface OnItemClickListener {
-        /**
-         * item点击回调
-         *
-         * @param adapter  The Adapter where the click happened.
-         * @param v        The view that was clicked.
-         * @param position The position of the view in the adapter.
-         */
-        void onItemClick(RecyclerView.Adapter adapter, View v, int position);
-    }
 
     /**
      * 刷新数据

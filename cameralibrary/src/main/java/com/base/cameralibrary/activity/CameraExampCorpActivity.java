@@ -1,5 +1,6 @@
 package com.base.cameralibrary.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.base.cameralibrary.view.CropLayout;
 public class CameraExampCorpActivity extends AppCompatActivity {
     private String mUrl;
     private CropLayout mCropLayout;
+    private int mCropHeight;
+    private int mCropWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +29,12 @@ public class CameraExampCorpActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mUrl = getIntent().getStringExtra("imageUrl");
+        mCropHeight =getIntent().getIntExtra("mCropHeight",500);
+        mCropWidth =getIntent().getIntExtra("mCropWidth", 500);
         setContentView(R.layout.camera_examp_crop_activity_layout);
         mCropLayout = findViewById(R.id.cropLayout);
-
+        mCropLayout.setCropHeight(mCropHeight);
+        mCropLayout.setCropWidth(mCropWidth);
         commonDelayFunction();
     }
 
@@ -64,6 +70,11 @@ public class CameraExampCorpActivity extends AppCompatActivity {
             @Override
             public void cameraSuccess(String mFilePath) {
                 Toast.makeText(CameraExampCorpActivity.this,"已保存 "+mFilePath,Toast.LENGTH_LONG).show();
+                Intent lIntent = new Intent("cameraactivityfinish");
+                lIntent.putExtra("filePath",mFilePath);
+                lIntent.putExtra("code",100);
+                CameraExampCorpActivity.this.sendBroadcast(lIntent);
+                CameraExampCorpActivity.this.finish();
             }
 
             @Override

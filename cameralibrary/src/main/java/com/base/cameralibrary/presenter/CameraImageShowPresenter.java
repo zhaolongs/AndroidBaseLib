@@ -38,10 +38,12 @@ public class CameraImageShowPresenter {
 
         private WeakReference<CameraImageShowPresenter> ref;
         private float maxWidth;
+        private float maxHeight;
 
         CameraImageShowAsyncTask(CameraImageShowPresenter activity, Context context, ImageView imageView) {
             ref = new WeakReference<>(activity);
             maxWidth = imageView.getMeasuredWidth();
+            maxHeight =imageView.getMeasuredHeight();
         }
 
         @Override
@@ -68,7 +70,7 @@ public class CameraImageShowPresenter {
                         if (bw > bh) {
                             scale = bw / maxWidth;
                         } else {
-                            scale = bh / maxWidth;
+                            scale = bh / maxHeight;
                         }
                         boolean needScaleAfterDecode = scale != 1;
                         opt.inJustDecodeBounds = false;

@@ -28,7 +28,7 @@ public class CropDrawable extends Drawable {
 
     private static final int RADIUS = 20;
 
-    private int mLeft, mRight, mTop, mBottom;
+    public int mLeft, mRight, mTop, mBottom;
 
     public CropDrawable(Context mContext) {
         this.mContext = mContext;

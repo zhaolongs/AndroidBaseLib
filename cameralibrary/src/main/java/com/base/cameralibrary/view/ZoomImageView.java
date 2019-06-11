@@ -20,6 +20,7 @@ public class ZoomImageView extends android.support.v7.widget.AppCompatImageView 
     private int mCropWidth;//设置裁剪宽度
     private int mCropHeight;//设置裁剪高度
 
+
     private int mOffset = 0;
     private int mVOffset = 0;
 
@@ -74,6 +75,7 @@ public class ZoomImageView extends android.support.v7.widget.AppCompatImageView 
         mScaleGestureDetector = new ScaleGestureDetector(context, this);
         this.setOnTouchListener(this);
     }
+
 
     private class ScaleRunnable implements Runnable {
         static final float BIGGER = 1.07f;
@@ -262,7 +264,7 @@ public class ZoomImageView extends android.support.v7.widget.AppCompatImageView 
             Drawable d = getDrawable();
             if (d == null)
                 return;
-            mVOffset = (getHeight() - (getWidth() - 2 * mOffset)) / 2;
+            //mVOffset = (getHeight() - (getWidth() - 2 * mOffset)) / 2;
 
             int width = getWidth();
             int height = getHeight();
@@ -338,6 +340,7 @@ public class ZoomImageView extends android.support.v7.widget.AppCompatImageView 
             }
             if (rect.bottom < height - mVOffset) {
                 deltaY = height - mVOffset - rect.bottom;
+
             }
         }
         mScaleMatrix.postTranslate(deltaX, deltaY);

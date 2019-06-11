@@ -1,9 +1,9 @@
 package com.base.scanlistlibrary.base;
 
+import android.view.View;
+
 import com.base.scanlistlibrary.presenter.ScanPresenter;
 import com.base.scanlistlibrary.scanlist.ScanRecyclerView;
-
-import java.util.HashMap;
 import java.util.List;
 
 public interface ScanContact {
@@ -14,6 +14,30 @@ public interface ScanContact {
         void onRefresh();
         //上拉加载
         void onLoadMore();
+    }
+
+    /**
+     * item点击监听器
+     */
+    public interface OnItemClickListener {
+        /**
+         * item点击回调
+         *
+         * @param adapter  The Adapter where the click happened.
+         * @param view        The view that was clicked.
+         * @param position The position of the view in the adapter.
+         */
+        void onItemClick(ScanBaseRecyclerViewAdapter adapter, View view, int position);
+    }
+    public interface OnItemLongClickListener {
+        /**
+         * item点击回调
+         *
+         * @param adapter  The Adapter where the click happened.
+         * @param view        The view that was clicked.
+         * @param position The position of the view in the adapter.
+         */
+        void onItemLongClick(ScanBaseRecyclerViewAdapter adapter, View view, int position);
     }
 
     public interface OnPageSelectListener<A> {

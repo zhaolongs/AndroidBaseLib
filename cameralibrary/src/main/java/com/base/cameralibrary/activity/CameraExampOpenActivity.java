@@ -1,7 +1,9 @@
 package com.base.cameralibrary.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,6 +40,9 @@ public class CameraExampOpenActivity extends AppCompatActivity {
     private FrameLayout mRootView;
     private Context mContext;
     private DisplayMetrics mDisplayMetrics;
+    private FinishActivityRecivier mFinishActivityRecivier;
+    private int mCropWidth;
+    private int mCropHeight;
 
 
     @Override
@@ -47,6 +52,9 @@ public class CameraExampOpenActivity extends AppCompatActivity {
         setContentView(getCommonLayoutId());
         mContext = this;
         mDisplayMetrics = mContext.getResources().getDisplayMetrics();
+        Intent lIntent = getIntent();
+        mCropWidth = lIntent.getIntExtra("cropWidth",500);
+        mCropHeight = lIntent.getIntExtra("cropHeight",500);
         commonInitView();
         commonFunction();
         commonDelayFunction();
@@ -90,10 +98,15 @@ public class CameraExampOpenActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mCameraUtils.destore();
+        unregisterReceiver(mFinishActivityRecivier);
     }
 
 
     protected void commonDelayFunction() {
+
+
+        mFinishActivityRecivier = new FinishActivityRecivier();
+        registerReceiver(mFinishActivityRecivier, new IntentFilter("cameraactivityfinish"));
 
         findViewById(R.id.aliyun_record_bg).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +149,9 @@ public class CameraExampOpenActivity extends AppCompatActivity {
         @Override
         public void cameraFaile(int errCode, String message) {
             Log.d(LOGTAG, errCode + " + errCode + " + message + "  message");
+            Intent lIntent = new Intent("cameraactivityfinish");
+            lIntent.putExtra("code",102);
+            CameraExampOpenActivity.this.sendBroadcast(lIntent);
         }
 
         @Override
@@ -161,6 +177,9 @@ public class CameraExampOpenActivity extends AppCompatActivity {
         public void onFaile(String s) {
             //异常
             Log.e(LOGTAG, "相册选取图片失败" + s);
+            Intent lIntent = new Intent("cameraactivityfinish");
+            lIntent.putExtra("code",101);
+            CameraExampOpenActivity.this.sendBroadcast(lIntent);
         }
     };
 
@@ -169,6 +188,8 @@ public class CameraExampOpenActivity extends AppCompatActivity {
         //加载显示图片
         final Intent lIntent = new Intent(CameraExampOpenActivity.this, CameraExampShowActivity.class);
         lIntent.putExtra("imageUrl", mFilePath);
+        lIntent.putExtra("mCropHeight", mCropHeight);
+        lIntent.putExtra("mCropWidth", mCropWidth);
         Log.d(LOGTAG, "imageUrl " + mFilePath);
         CameraExampOpenActivity.this.startActivity(lIntent);
     }
@@ -185,6 +206,14 @@ public class CameraExampOpenActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             mCameraUtils.onActivityResult(requestCode, resultCode, data, mContext, mCameraPhotoGraphCallback);
+        }
+    }
+
+    class FinishActivityRecivier extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            CameraExampOpenActivity.this.finish();
         }
     }
 }

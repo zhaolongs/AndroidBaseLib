@@ -1,6 +1,9 @@
 package com.base.cameralibrary.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +18,9 @@ import com.base.cameralibrary.presenter.CameraImageShowPresenter;
 
 public class CameraExampShowActivity extends AppCompatActivity {
 
+    private FinishActivityRecivier mFinishActivityRecivier;
+    private int mCropWidth;
+    private int mCropHeight;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +33,10 @@ public class CameraExampShowActivity extends AppCompatActivity {
 
         final ImageView showImageView = findViewById(R.id.iv_photo_select);
         final String lImageUrl = getIntent().getStringExtra("imageUrl");
+
+        mCropHeight =getIntent().getIntExtra("mCropHeight",500);
+        mCropWidth =getIntent().getIntExtra("mCropWidth", 500);
+
         new Handler(Looper.myLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -47,8 +57,30 @@ public class CameraExampShowActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final Intent lIntent = new Intent(CameraExampShowActivity.this, CameraExampCorpActivity.class);
                 lIntent.putExtra("imageUrl", lImageUrl);
+                lIntent.putExtra("mCropHeight", mCropHeight);
+                lIntent.putExtra("mCropWidth", mCropWidth);
                 CameraExampShowActivity.this.startActivity(lIntent);
             }
         });
+
+        mFinishActivityRecivier = new FinishActivityRecivier();
+        registerReceiver(mFinishActivityRecivier, new IntentFilter("cameraactivityfinish"));
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mFinishActivityRecivier);
+    }
+
+
+    class FinishActivityRecivier extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            CameraExampShowActivity.this.finish();
+        }
     }
 }

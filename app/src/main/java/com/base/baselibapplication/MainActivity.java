@@ -1,6 +1,9 @@
 package com.base.baselibapplication;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,9 +21,13 @@ import com.base.baselibapplication.test.activity.TestStagPicPageListActivity;
 import com.base.baselibapplication.test.activity.TestVideoPageListActivity;
 import com.base.baselibapplication.zxing.ZxingMainActivity;
 import com.base.cameralibrary.activity.CameraExampOpenActivity;
+import com.base.cameralibrary.activity.CameraExampShowActivity;
+import com.base.scanlistlibrary.videoplay.LogUtil;
 import com.studyyoun.androidbaselibrary.utils.SelectorUtil;
 
 public class MainActivity extends AppCompatActivity {
+
+    private FinishActivityRecivier mFinishActivityRecivier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +39,10 @@ public class MainActivity extends AppCompatActivity {
         camerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.this.startActivity(new Intent(MainActivity.this, CameraExampOpenActivity.class));
+                Intent lIntent = new Intent(MainActivity.this, CameraExampOpenActivity.class);
+                lIntent.putExtra("cropWidth",500);
+                lIntent.putExtra("cropHeight",200);
+                MainActivity.this.startActivity(lIntent);
             }
         });
         findViewById(R.id.tv_auto_scaner).setOnClickListener(new View.OnClickListener() {
@@ -100,5 +110,27 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(new Intent(MainActivity.this, TestGlideLoadingImageActivity.class));
             }
         });
+
+
+
+        mFinishActivityRecivier = new FinishActivityRecivier();
+        registerReceiver(mFinishActivityRecivier, new IntentFilter("cameraactivityfinish"));
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mFinishActivityRecivier);
+    }
+
+    class FinishActivityRecivier extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            LogUtil.d("reciver ");
+            int lCode = intent.getIntExtra("code", 0);
+            String imagPath = intent.getStringExtra("filePath");
+        }
     }
 }

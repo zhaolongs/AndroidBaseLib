@@ -39,6 +39,10 @@ public class CropFloatView extends View {
         mCropDrawable.draw(canvas);
     }
 
+    public CropDrawable getCropDrawable() {
+        return mCropDrawable;
+    }
+
     private void cropDrawable() {
         if (isCrop) return;
         mCropDrawable.setRegion(mFloatRect);
