@@ -1,7 +1,25 @@
 # FancyButton
 FancyButton 自定义View使用方法 
 动态设置 enable 来改变button的样式
+
+效果图：
+ 
+ * setEnalbe(falsg)时 不可点击时
+
+![setEnalbe(falsg)时](https://github.com/zhaolongs/AndroidBaseLib/blob/master/images/fans_enable_false.png)
+
+ * setEnalbe(treu)时 可点击时
+ 
+![setEnalbe(true)时](https://github.com/zhaolongs/AndroidBaseLib/blob/master/images/fans_enable_true.png )
+
+
+ * 当然还有按下时的效果 这里没有捕捉到效果图
+
+*** 
+
 使用方法 ：
+
+
 
 ```xml
                     <mehdi.sakout.fancybuttons.FancyButton
