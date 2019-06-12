@@ -1,1 +1,1 @@
-include ':app', ':androidbaselibrary', ':multi-image-selector', ':cameralibrary', ':scanlistlibrary', ':zxinglite', ':module_http', ':module_share', ':FancyButton'
+include ':app', ':androidbaselibrary', ':multi-image-selector', ':cameralibrary', ':scanlistlibrary', ':zxinglite', ':module_http', ':module_share', ':FancyButton', ':module_utils_lib'
