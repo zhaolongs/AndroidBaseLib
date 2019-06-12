@@ -18,22 +18,22 @@ import static com.base.utils.lib.PermissionConfig.sPermissAlertTitle;
 /**
  * Create by alv1 on 2019/6/12
  */
-public class ScanPermissionUtils {
+public class PermissionUtils {
 
-    public ScanPermissionUtils(Context context, ScanPermissionReCallback pAnalyzeCallback,String ... permissions){
+    public PermissionUtils(Context context, PermissionReCallback pAnalyzeCallback, String ... permissions){
         init(context,pAnalyzeCallback,permissions);
     }
-    public ScanPermissionUtils(Context context, ScanPermissionReCallback pAnalyzeCallback){
+    public PermissionUtils(Context context, PermissionReCallback pAnalyzeCallback){
         init(context,pAnalyzeCallback, mDefaultPermissions);
     }
 
-    private void init(Context context, ScanPermissionReCallback pAnalyzeCallback, String[] permissions) {
+    private void init(Context context, PermissionReCallback pAnalyzeCallback, String[] permissions) {
         mContext = context;
         mScanPermissionReCallback=pAnalyzeCallback;
         initDefaultPermissionFunction();
     }
 
-    private ScanPermissionReCallback mScanPermissionReCallback;
+    private PermissionReCallback mScanPermissionReCallback;
     private Context mContext;
     private String[] mDefaultPermissions = new String[3];
 
