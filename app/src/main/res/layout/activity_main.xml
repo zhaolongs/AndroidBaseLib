@@ -22,6 +22,10 @@
                 android:id="@+id/camer_tv"
                 style="@style/main_text_style"
                 android:text="自定义相机 " />
+            <TextView
+                android:id="@+id/camer_tv_test"
+                style="@style/main_text_style"
+                android:text="自定义相机Test " />
 
             <TextView
                 android:id="@+id/tv_auto_scaner"

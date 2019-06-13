@@ -1,6 +1,7 @@
 package com.base.baselibapplication.test.activity;
 
 import android.content.Intent;
+import android.hardware.SensorEvent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,9 @@ import com.base.baselibapplication.R;
 import com.base.cameralibrary.CameraUtils;
 import com.base.cameralibrary.activity.CameraExampCorpActivity;
 import com.base.cameralibrary.callback.CameraCallBack;
+import com.base.cameralibrary.callback.CameraDarkCallBack;
 import com.base.cameralibrary.presenter.CameraImageShowPresenter;
+import com.base.scanlistlibrary.videoplay.LogUtil;
 import com.studyyoun.androidbaselibrary.utils.LogUtils;
 
 /**
@@ -88,6 +91,27 @@ public class TestCustomCameraActivity extends AppCompatActivity {
             }
         });
 
+        mCameraUtils.setLineDarkCallBack(new CameraDarkCallBack() {
+            @Override
+            public void onLineDark(long pCameraLight) {
+                LogUtils.d("onLineDark: "+pCameraLight);
+            }
+
+            @Override
+            public void onLineNoDark(long pCameraLight) {
+                LogUtils.d("onLineNoDark: "+pCameraLight);
+            }
+
+            @Override
+            public void onDarkList(long[] pDarkList, long pCameraLight) {
+
+            }
+
+            @Override
+            public void onSensorChanged(SensorEvent pEvent, float pLux) {
+                LogUtil.d("光线强度 "+ pLux);
+            }
+        });
 
     }
 

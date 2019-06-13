@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.base.baselibapplication.example.VideoMainActivity;
 import com.base.baselibapplication.test.activity.TestAutoScannerViewActivity;
+import com.base.baselibapplication.test.activity.TestCustomCameraActivity;
 import com.base.baselibapplication.test.activity.TestGirdPicPageListActivity;
 import com.base.baselibapplication.test.activity.TestGlideLoadingImageActivity;
 import com.base.baselibapplication.test.activity.TestRecyclerViewActivity;
@@ -40,6 +41,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent lIntent = new Intent(MainActivity.this, CameraExampOpenActivity.class);
+                lIntent.putExtra("cropWidth",500);
+                lIntent.putExtra("cropHeight",200);
+                MainActivity.this.startActivity(lIntent);
+            }
+        });
+        TextView camerTestTextView =findViewById(R.id.camer_tv_test);
+        SelectorUtil.addSelector(this,Color.parseColor("#9955ff"),Color.parseColor("#7700ff"),camerTestTextView);
+        camerTestTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent lIntent = new Intent(MainActivity.this, TestCustomCameraActivity.class);
                 lIntent.putExtra("cropWidth",500);
                 lIntent.putExtra("cropHeight",200);
                 MainActivity.this.startActivity(lIntent);

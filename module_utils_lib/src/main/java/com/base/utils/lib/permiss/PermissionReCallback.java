@@ -1,4 +1,4 @@
-package com.base.utils.lib;
+package com.base.utils.lib.permiss;
 
 /**
  * Create by alv1 on 2019/6/12

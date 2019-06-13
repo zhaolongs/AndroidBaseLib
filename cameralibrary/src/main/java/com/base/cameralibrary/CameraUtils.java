@@ -22,6 +22,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.FrameLayout;
 
 import com.base.cameralibrary.callback.CameraCallBack;
+import com.base.cameralibrary.callback.CameraDarkCallBack;
 import com.base.cameralibrary.callback.CameraPhotoGraphCallback;
 import com.base.cameralibrary.presenter.CameraOpenPresenter;
 import com.base.cameralibrary.presenter.CameraPhotoPresenter;
@@ -105,5 +106,13 @@ public class CameraUtils implements CameraContact.CommonCameraInterface {
     @Override
     public void openCameraFlashFunction() {
         mCameraOpenPresenter.openCameraFlashFunction();
+    }
+
+
+    public void setLineDarkCallBack(CameraDarkCallBack pLineDarkCallBack){
+        mCameraOpenPresenter.setCameraDarkCallBack(pLineDarkCallBack);
+    }
+    public void setIsUseShopPreview(boolean flag){
+        mCameraOpenPresenter.setShotPreview(flag);
     }
 }

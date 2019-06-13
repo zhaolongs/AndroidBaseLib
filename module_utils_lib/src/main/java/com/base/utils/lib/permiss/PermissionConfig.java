@@ -1,4 +1,4 @@
-package com.base.utils.lib;
+package com.base.utils.lib.permiss;
 
 public class PermissionConfig {
     //申请权限提示用户弹框标题

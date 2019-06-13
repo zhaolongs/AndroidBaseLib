@@ -53,6 +53,7 @@ public interface CameraContact {
         void reCameraClick();
         void onCameraClick();
         void openCameraFlashFunction();
+        void destore();
     }
 
     //打开相册

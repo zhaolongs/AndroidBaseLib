@@ -11,6 +11,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
@@ -21,11 +25,14 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.base.cameralibrary.CameraContact;
 import com.base.cameralibrary.CameraUtils;
 import com.base.cameralibrary.callback.CameraCallBack;
+import com.base.cameralibrary.callback.CameraDarkCallBack;
+import com.base.cameralibrary.utils.LightSensorUtil;
 import com.base.cameralibrary.view.CameraPreview;
 
 import java.io.File;
@@ -33,6 +40,8 @@ import java.io.FileOutputStream;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 public class CameraOpenPresenter implements CameraContact.CameraPresenter {
 
@@ -56,6 +65,8 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
      * 图片种类
      */
     private static final String IMAGE_TYPE = ".jpeg";
+    private boolean mIsShotPreview = false;
+    private SensorManager mSenosrManager;
 
 
     public CameraOpenPresenter() {
@@ -69,6 +80,7 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
         this.mPicWidth = picWidth;
         this.mPicHeight = picHeight;
     }
+
 
     @Override
     public void stop() {
@@ -108,6 +120,10 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
         }
     }
 
+    public void onFouseCameraClick() {
+
+    }
+
     @Override
     public void openCameraFlashFunction() {
         openOrClose = !openOrClose;
@@ -137,6 +153,13 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
         if (parameters.getSupportedFocusModes().contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
             // 连续对焦模式
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+        }
+        parameters.setPreviewFrameRate(60);
+        if (mIsShotPreview) {
+            //当下一幅预览图像可用时调用一次onPreviewFrame
+            mCamera.setOneShotPreviewCallback(mPreviewCallback);
+        }else {
+            mCamera.setPreviewCallback(mPreviewCallback);
         }
         //图片的格式
         parameters.setPictureFormat(ImageFormat.JPEG);
@@ -199,6 +222,7 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
             }
         }
 
+
         CameraPreview mPreview = new CameraPreview(mContext, mCamera);
         mFrameLayout.addView(mPreview);
 
@@ -217,6 +241,76 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
             lAsyncTask.execute(data);
         }
     };
+
+    private Camera.PreviewCallback mPreviewCallback = new Camera.PreviewCallback() {
+        @Override
+        public void onPreviewFrame(byte[] data, Camera camera) {
+
+            previewDarkFuntion(camera,data);
+
+        }
+    };
+
+    private CameraDarkCallBack mCameraDarkCallBack;
+    //上次记录的时间戳
+    private long lastRecordTime = System.currentTimeMillis();
+    //上次记录的索引
+    private int darkIndex = 0;
+    //一个历史记录的数组，255是代表亮度最大值
+    private long[] darkList = new long[]{255, 255, 255, 255};
+    //扫描间隔
+    private int waitScanTime = 300;
+    //亮度低的阀值
+    private int darkValue = 60;
+    private void previewDarkFuntion(Camera camera, byte[] data) {
+        if (mCameraDarkCallBack != null) {
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastRecordTime < waitScanTime) {
+                return;
+            }
+            lastRecordTime = currentTime;
+
+            int width = camera.getParameters().getPreviewSize().width;
+            int height = camera.getParameters().getPreviewSize().height;
+            //像素点的总亮度
+            long pixelLightCount = 0L;
+            //像素点的总数
+            long pixeCount = width * height;
+            //采集步长，因为没有必要每个像素点都采集，可以跨一段采集一个，减少计算负担，必须大于等于1。
+            int step = 10;
+            //data.length - allCount * 1.5f的目的是判断图像格式是不是YUV420格式，只有是这种格式才相等
+            //因为int整形与float浮点直接比较会出问题，所以这么比
+            if (Math.abs(data.length - pixeCount * 1.5f) < 0.00001f) {
+                for (int i = 0; i < pixeCount; i += step) {
+                    //如果直接加是不行的，因为data[i]记录的是色值并不是数值，byte的范围是+127到—128，
+                    // 而亮度FFFFFF是11111111是-127，所以这里需要先转为无符号unsigned long参考Byte.toUnsignedLong()
+                    pixelLightCount += ((long) data[i]) & 0xffL;
+                }
+                //平均亮度
+                long cameraLight = pixelLightCount / (pixeCount / step);
+                //更新历史记录
+                int lightSize = darkList.length;
+                darkList[darkIndex = darkIndex % lightSize] = cameraLight;
+                darkIndex++;
+                boolean isDarkEnv = true;
+                //判断在时间范围waitScanTime * lightSize内是不是亮度过暗
+                for (int i = 0; i < lightSize; i++) {
+                    if (darkList[i] > darkValue) {
+                        isDarkEnv = false;
+                    }
+                }
+
+                if (isDarkEnv) {
+                    //亮度过暗回调
+                    mCameraDarkCallBack.onLineDark(cameraLight);
+                } else {
+                    mCameraDarkCallBack.onLineNoDark(cameraLight);
+                }
+                mCameraDarkCallBack.onDarkList(darkList, cameraLight);
+            }
+        }
+    }
+
 
     public void onRequestPermissionsResult(String[] permissions) {
         if (checkPermissions(permissions)) {
@@ -281,6 +375,7 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
                 .create().show();
     }
 
+    @Override
     public void destore() {
         if (mCamera != null) {
             mCamera.stopPreview();
@@ -288,6 +383,10 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
             mCamera.release();
             mCamera = null;
         }
+        if (mSenosrManager != null) {
+            LightSensorUtil.unregisterLightSensor(mSenosrManager,lightSensorListener);
+        }
+
     }
 
     public void changeCameraClick() {
@@ -421,8 +520,41 @@ public class CameraOpenPresenter implements CameraContact.CameraPresenter {
             }
         }
 
-
     }
 
+
+    private SensorEventListener lightSensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
+                //光线强度
+                float lux = event.values[0];
+                mCameraDarkCallBack.onSensorChanged(event,lux);
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    };
+
+    /**
+     * 光线亮度回调
+     * @param pCameraDarkCallBack
+     */
+    public void setCameraDarkCallBack(CameraDarkCallBack pCameraDarkCallBack) {
+        this.mCameraDarkCallBack = pCameraDarkCallBack;
+        mSenosrManager = LightSensorUtil.getSenosrManager(mContext);
+        LightSensorUtil.registerLightSensor(mSenosrManager,lightSensorListener);
+    }
+
+    /**
+     * 设置是否使用 可用图像使用
+     * @param flag
+     */
+    public void setShotPreview(boolean flag){
+        this.mIsShotPreview = flag;
+    }
 
 }

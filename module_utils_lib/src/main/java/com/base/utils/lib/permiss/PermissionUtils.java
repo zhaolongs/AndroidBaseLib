@@ -1,4 +1,4 @@
-package com.base.utils.lib;
+package com.base.utils.lib.permiss;
 
 import android.Manifest;
 import android.app.Activity;
@@ -12,7 +12,7 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
-import static com.base.utils.lib.PermissionConfig.sPermissAlertTitle;
+import static com.base.utils.lib.permiss.PermissionConfig.sPermissAlertTitle;
 
 
 /**

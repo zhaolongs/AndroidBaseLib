@@ -1,4 +1,4 @@
-package com.base.utils.lib;
+package com.base.utils.lib.string;
 
 import java.io.UnsupportedEncodingException;
 
