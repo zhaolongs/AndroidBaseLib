@@ -1,6 +1,7 @@
 # Gradle 配置文件 文档说明
 
 ```groovy
+
 apply plugin: 'com.android.application'
 
 android {
@@ -8,17 +9,23 @@ android {
     signingConfigs {
         //        正式发布使用签名文件 名字自定义
         app_key {
-            keyAlias 'app_key_alias'
-            keyPassword 'androidlongs'
-            storeFile file('/Users/androidlongs/Desktop/code/android/application/app_key.jks')
-            storePassword 'androidlongs'
+            keyAlias 'app-key'
+            keyPassword '123456'
+            storeFile file('../app_key.jks')
+            storePassword '123456'
+        }
+        bate_app_key {
+            keyAlias 'app-key'
+            keyPassword '123456'
+            storeFile file('../app_key.jks')
+            storePassword '123456'
         }
         //        debug调试编译发布使用签名文件 名字自定义
         debug_app_key {
-            keyAlias 'debug_key'
-            keyPassword 'androidlongs'
-            storeFile file('/Users/androidlongs/Desktop/code/android/application/debug_app_key.jks')
-            storePassword 'androidlongs'
+            keyAlias 'app-key'
+            keyPassword '123456'
+            storeFile file('../app_key.jks')
+            storePassword '123456'
         }
     }
 
@@ -87,7 +94,7 @@ android {
     buildTypes {
         debug {
             //设置签名信息
-            signingConfig signingConfigs.app_key
+            signingConfig signingConfigs.debug_app_key
             ////是否对代码进行混淆
             minifyEnabled false
             //指定混淆的规则文件
@@ -112,7 +119,7 @@ android {
             renderscriptDebuggable false
         }
         beta {
-            signingConfig signingConfigs.app_key
+            signingConfig signingConfigs.bate_app_key
             buildConfigField('boolean', "API_LOG", "false")
             //是否对代码进行混淆
             minifyEnabled false
@@ -164,6 +171,7 @@ dependencies {
     implementation project(':scanlistlibrary')
     implementation project(':zxinglite')
 }
+
 
 ```
 
