@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.base.audiolibrary.AudioRecordActivity;
+import com.base.audiolibrary.AudioRecordMp3Activity;
+import com.base.audiolibrary.AudioRecordMp3UtilsActivity;
 import com.base.baselibapplication.example.VideoMainActivity;
 import com.base.baselibapplication.test.activity.TestAutoScannerViewActivity;
 import com.base.baselibapplication.test.activity.TestCustomCameraActivity;
@@ -23,6 +26,8 @@ import com.base.baselibapplication.test.activity.TestVideoPageListActivity;
 import com.base.baselibapplication.zxing.ZxingMainActivity;
 import com.base.cameralibrary.activity.CameraExampOpenActivity;
 import com.base.cameralibrary.activity.CameraExampShowActivity;
+import com.base.cameralibrary.activity.CameraXExampOpenActivity;
+import com.base.cameralibrary.presenter.CameraXOpenPresenter;
 import com.base.scanlistlibrary.videoplay.LogUtil;
 import com.studyyoun.androidbaselibrary.utils.SelectorUtil;
 
@@ -34,13 +39,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
 
         TextView camerTextView =findViewById(R.id.camer_tv);
         SelectorUtil.addSelector(this,Color.parseColor("#9955ff"),Color.parseColor("#7700ff"),camerTextView);
         camerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent lIntent = new Intent(MainActivity.this, CameraExampOpenActivity.class);
+                Intent lIntent = new Intent(MainActivity.this, CameraXExampOpenActivity.class);
                 lIntent.putExtra("cropWidth",500);
                 lIntent.putExtra("cropHeight",200);
                 MainActivity.this.startActivity(lIntent);
@@ -113,7 +119,25 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(new Intent(MainActivity.this, ZxingMainActivity.class));
             }
         });
-
+    
+        findViewById(R.id.tv_audio_show).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.startActivity(new Intent(MainActivity.this, AudioRecordActivity.class));
+            }
+        });
+        findViewById(R.id.tv_audio_mp3_show).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.startActivity(new Intent(MainActivity.this, AudioRecordMp3Activity.class));
+            }
+        });
+        findViewById(R.id.tv_audio_mp3_utis_show).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.startActivity(new Intent(MainActivity.this, AudioRecordMp3UtilsActivity.class));
+            }
+        });
         TextView testShowImageTextView =findViewById(R.id.tv_img_show);
         SelectorUtil.addSelector(this,Color.parseColor("#9955ff"),Color.parseColor("#7700ff"),testShowImageTextView);
         testShowImageTextView.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +146,8 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(new Intent(MainActivity.this, TestGlideLoadingImageActivity.class));
             }
         });
-
+    
+        
 
 
         mFinishActivityRecivier = new FinishActivityRecivier();

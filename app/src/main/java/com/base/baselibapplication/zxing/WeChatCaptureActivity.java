@@ -48,6 +48,6 @@ public class WeChatCaptureActivity extends BaseCaptureActivity {
         playBeepSoundAndVibrate(true, false);
         Toast.makeText(this, rawResult.getText(), Toast.LENGTH_LONG).show();
 //        对此次扫描结果不满意可以调用
-//        reScan();
+        reScan();
     }
 }

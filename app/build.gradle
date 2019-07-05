@@ -166,4 +166,5 @@ dependencies {
     implementation project(':cameralibrary')
     implementation project(':scanlistlibrary')
     implementation project(':zxinglite')
+    implementation project(path: ':audiolibrary')
 }

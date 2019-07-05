@@ -31,6 +31,7 @@ public interface CameraContact {
 
         //设置是否连续拍照
         CameraUtils setContinuous(boolean continuous);
+        CameraXUtils setXContinuous(boolean continuous);
 
         //重新拍照
         void reCameraClick();

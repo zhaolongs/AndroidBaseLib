@@ -13,7 +13,13 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 
 public class CameraImageShowPresenter {
+    
+    public interface OnCamerImageShowCallBack{
+        void onFinish(int flag,String message);
+    }
+    
 
+    private OnCamerImageShowCallBack mOnCamerImageShowCallBack;
     private ImageView mImageView;
     private Context mContext;
     private static CameraImageShowPresenter mCameraImageShowPresenter;
@@ -28,9 +34,13 @@ public class CameraImageShowPresenter {
     }
 
     public void showImage(ImageView imageView,String locationImagePath){
+        showImage(imageView,locationImagePath,null);
+    }
+    public void showImage(ImageView imageView,String locationImagePath,OnCamerImageShowCallBack imageShowCallBack){
         this.mImageView = imageView;
         this.mContext = imageView.getContext();
-        CameraImageShowAsyncTask lCameraImageShowAsyncTask = new CameraImageShowAsyncTask(this, mContext, imageView);
+        this.mOnCamerImageShowCallBack = imageShowCallBack;
+        CameraImageShowAsyncTask lCameraImageShowAsyncTask = new CameraImageShowAsyncTask(this, mContext, imageView,imageShowCallBack);
         lCameraImageShowAsyncTask.execute(locationImagePath);
     }
 
@@ -39,11 +49,13 @@ public class CameraImageShowPresenter {
         private WeakReference<CameraImageShowPresenter> ref;
         private float maxWidth;
         private float maxHeight;
+        private OnCamerImageShowCallBack mOnCamerImageShowCallBack;
 
-        CameraImageShowAsyncTask(CameraImageShowPresenter activity, Context context, ImageView imageView) {
+        CameraImageShowAsyncTask(CameraImageShowPresenter activity, Context context, ImageView imageView, OnCamerImageShowCallBack imageShowCallBack) {
             ref = new WeakReference<>(activity);
             maxWidth = imageView.getMeasuredWidth();
             maxHeight =imageView.getMeasuredHeight();
+            mOnCamerImageShowCallBack = imageShowCallBack;
         }
 
         @Override
@@ -93,11 +105,14 @@ public class CameraImageShowPresenter {
             if (bitmap != null && ref != null && ref.get() != null) {
                 ref.get().initThumbnail(bitmap);
             }
+            if (mOnCamerImageShowCallBack != null) {
+                mOnCamerImageShowCallBack.onFinish(0,"success");
+            }
         }
     }
 
     private void initThumbnail(Bitmap thumbnail) {
-        if (thumbnail != null) {
+        if (thumbnail != null&&mImageView!=null) {
             mImageView.setImageBitmap(thumbnail);
         }else {
 

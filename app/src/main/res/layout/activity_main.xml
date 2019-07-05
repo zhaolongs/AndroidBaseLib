@@ -77,6 +77,18 @@
                 style="@style/main_text_style"
                 android:text="测试加载图片" />
 
+            <TextView
+                android:id="@+id/tv_audio_show"
+                style="@style/main_text_style"
+                android:text="测试连续录音" />
+            <TextView
+                android:id="@+id/tv_audio_mp3_show"
+                style="@style/main_text_style"
+                android:text="mp3录音" />
+            <TextView
+                android:id="@+id/tv_audio_mp3_utis_show"
+                style="@style/main_text_style"
+                android:text="mp3 utils 录音" />
         </LinearLayout>
     </com.studyyoun.androidbaselibrary.view.DropDownSpringbackScrollView>
 </LinearLayout>

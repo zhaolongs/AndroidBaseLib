@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.base.cameralibrary.CameraUtils;
+import com.base.cameralibrary.CameraXUtils;
 import com.base.cameralibrary.R;
 import com.base.cameralibrary.callback.CameraCallBack;
 import com.base.cameralibrary.callback.CameraPhotoGraphCallback;
@@ -30,9 +30,9 @@ import static com.base.cameralibrary.CameraConfig.LOGTAG;
  * 2、前后镜头切换
  * 3、打开相册
  */
-public class CameraExampOpenActivity extends Activity {
+public class CameraXExampOpenActivity extends Activity {
 
-    private CameraUtils mCameraUtils;
+    private CameraXUtils mCameraUtils;
     private LinearLayout mBackLayout;
     private Uri mImageUri;
     private String mMImagePath;
@@ -85,7 +85,7 @@ public class CameraExampOpenActivity extends Activity {
 
     protected void commonFunction() {
         //初始化自定义相机
-        mCameraUtils = CameraUtils.getInstance().setContinuous(true).initCamerView(this, mRootView, mDisplayMetrics.widthPixels, mDisplayMetrics.heightPixels, mCameraCallBack);
+        mCameraUtils = CameraXUtils.getInstance().setXContinuous(true).initCamerView(this, mRootView, mDisplayMetrics.widthPixels, mDisplayMetrics.heightPixels, mCameraCallBack);
 
     }
 
@@ -114,13 +114,13 @@ public class CameraExampOpenActivity extends Activity {
         findViewById(R.id.aliyun_record_bg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CameraUtils.getInstance().onCameraClick();
+                CameraXUtils.getInstance().onCameraClick();
             }
         });
         findViewById(R.id.camera_change).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CameraUtils.getInstance().changeCameraClick();
+                CameraXUtils.getInstance().changeCameraClick();
             }
         });
 
@@ -128,21 +128,21 @@ public class CameraExampOpenActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Log.d(LOGTAG, "打开相册");
-                CameraUtils.getInstance().openCapTureGroupFunction(CameraExampOpenActivity.this);
+                CameraXUtils.getInstance().openCapTureGroupFunction(CameraXExampOpenActivity.this);
             }
         });
         findViewById(R.id.camera_flash).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(LOGTAG, "打开闪光灯");
-                CameraUtils.getInstance().openCameraFlashFunction();
+                CameraXUtils.getInstance().openCameraFlashFunction();
             }
         });
 
         mBackLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CameraExampOpenActivity.this.finish();
+                CameraXExampOpenActivity.this.finish();
             }
         });
 
@@ -154,7 +154,7 @@ public class CameraExampOpenActivity extends Activity {
             Log.d(LOGTAG, errCode + " + errCode + " + message + "  message");
             Intent lIntent = new Intent("cameraactivityfinish");
             lIntent.putExtra("code",102);
-            CameraExampOpenActivity.this.sendBroadcast(lIntent);
+            CameraXExampOpenActivity.this.sendBroadcast(lIntent);
         }
 
         @Override
@@ -165,7 +165,7 @@ public class CameraExampOpenActivity extends Activity {
 
         @Override
         public void cameraPermisExit() {
-            CameraExampOpenActivity.this.finish();
+            CameraXExampOpenActivity.this.finish();
         }
     };
 
@@ -182,20 +182,20 @@ public class CameraExampOpenActivity extends Activity {
             Log.e(LOGTAG, "相册选取图片失败" + s);
             Intent lIntent = new Intent("cameraactivityfinish");
             lIntent.putExtra("code",101);
-            CameraExampOpenActivity.this.sendBroadcast(lIntent);
+            CameraXExampOpenActivity.this.sendBroadcast(lIntent);
         }
     };
 
     private void showImageFunction(String mFilePath) {
         this.mFilePath = mFilePath;
         //加载显示图片
-        final Intent lIntent = new Intent(CameraExampOpenActivity.this, CameraExampShowActivity.class);
+        final Intent lIntent = new Intent(CameraXExampOpenActivity.this, CameraExampShowActivity.class);
         lIntent.putExtra("imageUrl", mFilePath);
         lIntent.putExtra("mCropHeight", mCropHeight);
         lIntent.putExtra("mCropWidth", mCropWidth);
         lIntent.putExtra("mICrop", mMICrop);
         Log.d(LOGTAG, "imageUrl " + mFilePath);
-        CameraExampOpenActivity.this.startActivity(lIntent);
+        CameraXExampOpenActivity.this.startActivity(lIntent);
     }
 
     @Override
@@ -217,7 +217,7 @@ public class CameraExampOpenActivity extends Activity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            CameraExampOpenActivity.this.finish();
+            CameraXExampOpenActivity.this.finish();
         }
     }
 }

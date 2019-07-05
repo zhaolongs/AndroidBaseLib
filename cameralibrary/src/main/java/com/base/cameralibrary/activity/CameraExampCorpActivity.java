@@ -1,5 +1,6 @@
 package com.base.cameralibrary.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,7 @@ import com.base.cameralibrary.presenter.CameraImageSavePresenter;
 import com.base.cameralibrary.presenter.CameraImageShowPresenter;
 import com.base.cameralibrary.view.CropLayout;
 
-public class CameraExampCorpActivity extends AppCompatActivity {
+public class CameraExampCorpActivity extends Activity {
     private String mUrl;
     private CropLayout mCropLayout;
     private int mCropHeight;

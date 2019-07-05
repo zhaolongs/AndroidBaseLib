@@ -7,16 +7,16 @@
     <application>
         <activity
             android:name=".activity.CameraExampOpenActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.CameraExampShowActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.CameraExampCorpActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.CameraXExampOpenActivity"
+            android:launchMode="singleTop" />
 
     </application>
 </manifest>

@@ -15,16 +15,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CameraManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
+import android.app.AlertDialog;
 import android.util.Log;
 import android.widget.FrameLayout;
 
@@ -41,7 +38,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
 
 public class CameraOpenPresenter implements CameraContact.CameraPresenter {
 
