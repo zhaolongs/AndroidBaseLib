@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.base.audiolibrary" >
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <application>
+        <activity android:name=".AudioRecordActivity" />
+        <activity android:name=".AudioRecordMp3Activity" />
+        <activity android:name=".AudioPlayActivity" />
+        <activity android:name=".AudioRecordMp3UtilsActivity" />
+    </application>
+</manifest>
